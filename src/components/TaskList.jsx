@@ -1,6 +1,8 @@
-/* eslint-disable react/prop-types */
+const TaskList = ({ Link, tasksObj, deleteTask, taskListEmpty }) => {
 
-const TaskList = ({ Link, tasksObj, deleteTask }) => {
+  //variables
+  let emptyMsgClass = tasksObj.length === 0 ? 'taskListSection__emptyMsg' : 'taskListSection__emptyMsg--hidden';
+
   //functions
   const handleDeleteTask = (ev) => {
     deleteTask(ev.target.id);
@@ -29,9 +31,9 @@ const TaskList = ({ Link, tasksObj, deleteTask }) => {
     </li>
   ));
 
-  /* Message: No tienes tareas pendientes. Yay! Para cuando no hay ninguna tarea  */
   return (
     <section className='taskListSection'>
+      <p className={emptyMsgClass}>¡No tienes tareas pendientes!</p>
       <ul className="taskListSection__ul">{taskList}</ul>
       <Link className='taskListSection__link' to="/">Ir al inicio</Link>
     </section>

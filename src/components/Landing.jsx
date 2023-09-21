@@ -9,6 +9,7 @@ const Landing = ({ Link, logo }) => {
       <Link to="/TasksList" className="landing__link landing__link--2">
         lista de tareas
       </Link>
+      <p className='landing__message'>Sitio en construcción ✨👩🏻‍💻</p>
     </section>
   );
 };

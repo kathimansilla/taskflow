@@ -1,7 +1,6 @@
 @import '../core/variables.scss';
 
 .taskListSection {
-    //hacer mixin
   background-color: rgb(210, 210, 210);
   display: flex;
   flex-direction: column;
@@ -9,39 +8,45 @@
   align-items: center;
   height: 80vh;
   gap: 20px;
+  &__emptyMsg {
+    font-family: $fontGeneral;
+    &--hidden {
+      display: none;
+    }
+  }
   &__ul {
     display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  & .item {
-    &__nameTask {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    & .item {
+      &__nameTask {
         font-family: $fontGeneral;
         display: flex;
         justify-content: center;
         gap: 10px;
         margin-bottom: 50px;
         &__check {
-            border: none;
-            background-color: transparent;
+          border: none;
+          background-color: transparent;
         }
-    }
-    &__button {
+      }
+      &__button {
         background-color: transparent;
         border: none;
         &:hover {
-            color: red;
-            cursor: pointer;
+          color: red;
+          cursor: pointer;
         }
+      }
     }
-  }
   }
   &__link {
     text-decoration: none;
     color: black;
-    font-size: .8rem;
+    font-size: 0.8rem;
     &:hover {
-        color: white;
+      color: gray;
     }
   }
 }

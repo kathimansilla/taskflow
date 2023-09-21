@@ -14,6 +14,7 @@ import logo from '../assets/images/logo-taskflow.svg';
 function App() {
   // state variables
   const [tasksObj, setTasksObj] = useState([]);
+  const [taskListEmpty, setTaskListEmpty] = useState(true);
 
 
   const newTaskObj = (keyName, value) => {
@@ -40,7 +41,7 @@ function App() {
         <Routes>
         <Route path='/' element={<Landing Link={Link} logo={logo} />} />
         <Route path='/NewTask' element={<Form Link={Link} newTaskObj={newTaskObj} />} />
-        <Route path='/TasksList' element={<TaskList Link={Link} tasksObj={tasksObj} deleteTask={deleteTask} />} />
+        <Route path='/TasksList' element={<TaskList Link={Link} tasksObj={tasksObj} deleteTask={deleteTask} taskListEmpty={taskListEmpty} />} />
         </Routes>
       </main>
       <Footer logo={logo} />
