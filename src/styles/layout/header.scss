@@ -1,0 +1,10 @@
+.header {
+    background-color: rgb(210, 210, 210);
+    height: 10vh;
+    position: sticky;
+    top: 0;
+    padding: 15px;
+    &__logo {
+        width: 40px;
+    }
+}

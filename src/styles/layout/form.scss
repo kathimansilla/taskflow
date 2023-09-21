@@ -1,0 +1,52 @@
+@import '../core/variables.scss';
+
+.formSection {
+  background-color: rgb(210, 210, 210);
+  height: 80vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  & .form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    &__title {
+      text-align: center;
+      font-family: $fontGeneral;
+    }
+    &__input {
+        &:hover {
+            box-shadow: 10px 5px 5px black;
+        }
+    }
+    &__buttonSave {
+        border-radius: 20%;
+        background-color: transparent;
+        font-size: .8rem;
+        transition: font-size 1s ease;
+        font-family: $fontGeneral;
+        &:hover {
+            background-color: white;
+            cursor:pointer;
+            border-color: antiquewhite;
+            color: gray;
+            font-size: .9rem;
+        }
+    }
+    &__link {
+        text-decoration: none;
+        color: black;
+        font-size: .8rem;
+        transition: font-size 1s ease;
+        font-family: $fontGeneral;
+        &:hover {
+            color: white;
+            font-size: 1rem;
+        }
+    }
+  }
+}

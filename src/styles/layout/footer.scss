@@ -1,0 +1,11 @@
+.footer {
+    background-color: rgb(97, 253, 253);
+    height: 10vh;
+    position: sticky;
+    bottom: 0;
+    display: flex;
+    padding: 0 15px;
+    &__logo {
+        width: 40px;
+    }
+}

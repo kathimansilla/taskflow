@@ -1,0 +1,31 @@
+@import '../core/variables.scss';
+
+.landing {
+  background-color: rgb(210, 210, 210);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+  gap: 10px;
+  &__title {
+    font-family: $fontGeneral;
+    font-weight: 600;
+  }
+  &__logo {
+    width: 60px;
+  } 
+  &__link {
+    font-family: $fontGeneral;
+    font-size: .8rem;
+    margin-top: 20px;
+    text-decoration: none;
+    color: black;
+    &:hover {
+      color: rgb(140, 140, 140);
+    }
+    &--2 {
+      margin-top: 0px;
+    }
+  }
+}
