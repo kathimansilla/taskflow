@@ -26,7 +26,6 @@ const TaskList = ({ Link, tasksObj, deleteTask }) => {
       <button className='item__button' onClick={handleDeleteTask} id={task.taskName}>
         Elimnar
       </button>
-      <button className='item__button'>Editar</button>
     </li>
   ));
 

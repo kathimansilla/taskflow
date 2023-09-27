@@ -20,21 +20,33 @@
     justify-content: center;
     align-items: center;
     & .item {
+      display: flex;
+      flex-direction: column;
       &__nameTask {
         font-family: $fontGeneral;
         display: flex;
         justify-content: center;
         gap: 10px;
-        margin-bottom: 50px;
+        cursor: pointer;
+        &:hover {
+          & ~ .item__button {
+            display: block;
+            align-self: end;
+          }
+        }
         &__check {
           border: none;
           background-color: transparent;
         }
       }
       &__button {
+        display: none;
         background-color: transparent;
         border: none;
+        margin-bottom: 5px;
         &:hover {
+          display: block;
+          align-self: end;
           color: red;
           cursor: pointer;
         }
