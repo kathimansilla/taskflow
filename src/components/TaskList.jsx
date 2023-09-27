@@ -33,7 +33,10 @@ const TaskList = ({ Link, tasksObj, deleteTask }) => {
     <section className='taskListSection'>
       <p className={emptyMsgClass}>¡No tienes tareas pendientes!</p>
       <ul className="taskListSection__ul">{taskList}</ul>
-      <Link className='taskListSection__link' to="/">Ir al inicio</Link>
+      <Link to="/NewTask" className='taskListSection__link'>
+        añadir tarea
+      </Link>
+      <Link className='taskListSection__link' to="/">inicio</Link>
     </section>
   );
 };

@@ -25,8 +25,8 @@ const Form = ({ Link, newTaskObj, saveTask }) => {
           />
           <input type="submit" onClick={handleSubmit} value="Guardar" className="form__buttonSave" />
         </form>
-        <Link to="/TasksList" className='form__link'>Ir a la lista de tareas</Link>
-        <Link to="/" className='form__link'>Ir al inicio</Link>
+        <Link to="/TasksList" className='form__link'>lista de tareas</Link>
+        <Link to="/" className='form__link'>inicio</Link>
       </section>
     </>
   );

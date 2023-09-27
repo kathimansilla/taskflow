@@ -20,7 +20,7 @@
     }
     &__input {
         &:hover {
-            box-shadow: 10px 5px 5px black;
+            box-shadow: 5px 3px 3px black;
         }
     }
     &__buttonSave {
@@ -45,7 +45,7 @@
         font-family: $fontGeneral;
         &:hover {
             color: gray;
-            font-size: 1rem;
+            font-size: .9rem;
         }
     }
   }
