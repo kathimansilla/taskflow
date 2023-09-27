@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import '../styles/App.css';
 import Header from './Header';
 import Landing from './Landing';
@@ -8,30 +8,40 @@ import Footer from './Footer';
 import '../styles/App.css';
 import { Route, Routes, Link } from 'react-router-dom';
 import logo from '../assets/images/logo-taskflow.svg';
+import ls from '../services/ls';
 
 
 
 function App() {
   // state variables
   const [tasksObj, setTasksObj] = useState([]);
-  const [taskListEmpty, setTaskListEmpty] = useState(true);
+  const [newTask, setNewTask] = useState({});
 
-
+  //functions
+  //con esta función se ve un preview
   const newTaskObj = (keyName, value) => {
-    setTasksObj(
-      [{[keyName]: value}]
-    );
+    const newData = {...newTask, [keyName]: value };
+    setNewTask(newData);
+    console.log(newTask);
   };
 
+  //con esta función se guarda la tarea en el Array de tareas y en localstorage y DDBB
+  const saveTask = () => {
+    const newTaskToArray = [...tasksObj, newTask];
+    setTasksObj(newTaskToArray);
+      //save in DDBB
+  };
 
-  /*Para agregar nuevas tareas. Clonar: setTasksObj(...tasksObj, {[taskName], value});*/
+  useEffect(() => {
+    ls.set('data', tasksObj)
+  }, [tasksObj]);
 
-  //esta función va a fallar porque no hay taskId aún
+  //Por ahora está funcionando con taskName en lugar de taskId
   const deleteTask = (taskId) => {
     console.log(taskId);
-    const cleanTaskObj = tasksObj.filter(task => task.taskId !== taskId);
+    const cleanTaskObj = tasksObj.filter(task => task.taskName !== taskId);
     setTasksObj(cleanTaskObj);
-    console.log(cleanTaskObj);
+    ls.remove(taskId);
   }
 
   return (
@@ -40,8 +50,8 @@ function App() {
       <main>
         <Routes>
         <Route path='/' element={<Landing Link={Link} logo={logo} />} />
-        <Route path='/NewTask' element={<Form Link={Link} newTaskObj={newTaskObj} />} />
-        <Route path='/TasksList' element={<TaskList Link={Link} tasksObj={tasksObj} deleteTask={deleteTask} taskListEmpty={taskListEmpty} />} />
+        <Route path='/NewTask' element={<Form Link={Link} newTaskObj={newTaskObj} saveTask={saveTask} />} />
+        <Route path='/TasksList' element={<TaskList Link={Link} tasksObj={tasksObj} deleteTask={deleteTask} />} />
         </Routes>
       </main>
       <Footer logo={logo} />

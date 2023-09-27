@@ -1,4 +1,4 @@
-const TaskList = ({ Link, tasksObj, deleteTask, taskListEmpty }) => {
+const TaskList = ({ Link, tasksObj, deleteTask }) => {
 
   //variables
   let emptyMsgClass = tasksObj.length === 0 ? 'taskListSection__emptyMsg' : 'taskListSection__emptyMsg--hidden';
@@ -6,11 +6,10 @@ const TaskList = ({ Link, tasksObj, deleteTask, taskListEmpty }) => {
   //functions
   const handleDeleteTask = (ev) => {
     deleteTask(ev.target.id);
-    console.log(ev.target.id);
-    console.log('delete');
   };
 
   const handleCompleteTask = (ev) => {
+    console.log(ev);
     /*Cambiar de color para diferenciarla de las tareas que no han sido completadas, deshabilitar botón de editar con una variable de estado booleana*/
   };
 
@@ -24,7 +23,7 @@ const TaskList = ({ Link, tasksObj, deleteTask, taskListEmpty }) => {
         </button>
         <p>{task.taskName}</p>
       </div>
-      <button className='item__button' onClick={handleDeleteTask} id={task.id}>
+      <button className='item__button' onClick={handleDeleteTask} id={task.taskName}>
         Elimnar
       </button>
       <button className='item__button'>Editar</button>
