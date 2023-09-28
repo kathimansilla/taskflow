@@ -14,15 +14,32 @@ import ls from '../services/ls';
 
 function App() {
   // state variables
+  const [idTask, setIdTask] = useState(0);
   const [tasksObj, setTasksObj] = useState([]);
   const [newTask, setNewTask] = useState({});
 
   //functions
-  //con esta función se ve un preview
   const newTaskObj = (keyName, value) => {
-    const newData = {...newTask, [keyName]: value };
+    setIdTask(idTask + 1);
+    const newData = {...newTask, 
+      [keyName]: value,
+      idTask: idTask,
+      isCompleted: false
+     };
     setNewTask(newData);
-    console.log(newTask);
+  };
+
+
+  //con esta función se marca la tarea como completada
+  const toggleCompletedTask = (idTask) => {
+    const completedTaskIndex = tasksObj.findIndex((task) => task.idTask === idTask);
+    if (completedTaskIndex === -1) {
+      console.log('error: no se encontró la tarea');
+    } else {
+      const updateTaskObj = [...tasksObj];
+      updateTaskObj[completedTaskIndex].isCompleted = !updateTaskObj[completedTaskIndex].isCompleted;
+      setTasksObj(updateTaskObj);
+    }
   };
 
   //con esta función se guarda la tarea en el Array de tareas y en localstorage y DDBB
@@ -32,6 +49,7 @@ function App() {
       //save in DDBB
   };
 
+  //useEffect
   useEffect(() => {
     ls.set('data', tasksObj)
   }, [tasksObj]);
@@ -51,7 +69,7 @@ function App() {
         <Routes>
         <Route path='/' element={<Landing Link={Link} logo={logo} />} />
         <Route path='/NewTask' element={<Form Link={Link} newTaskObj={newTaskObj} saveTask={saveTask} />} />
-        <Route path='/TasksList' element={<TaskList Link={Link} tasksObj={tasksObj} deleteTask={deleteTask} />} />
+        <Route path='/TasksList' element={<TaskList Link={Link} tasksObj={tasksObj} deleteTask={deleteTask} toggleCompletedTask={toggleCompletedTask} />} />
         </Routes>
       </main>
       <Footer logo={logo} />
