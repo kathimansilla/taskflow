@@ -1,4 +1,9 @@
+import { useState } from 'react';
+
 const TaskList = ({ Link, tasksObj, deleteTask }) => {
+  //state variables
+  const [isChecked, setIsChecked] = useState(false);
+  const [completedTask, setCompletedTask] = useState('');
 
   //variables
   let emptyMsgClass = tasksObj.length === 0 ? 'taskListSection__emptyMsg' : 'taskListSection__emptyMsg--hidden';
@@ -10,17 +15,18 @@ const TaskList = ({ Link, tasksObj, deleteTask }) => {
 
   const handleCompleteTask = (ev) => {
     console.log(ev);
-    /*Cambiar de color para diferenciarla de las tareas que no han sido completadas, deshabilitar botón de editar con una variable de estado booleana*/
+    setIsChecked(!isChecked);
+    setCompletedTask(isChecked ? '' : 'completedTask');
   };
 
   /*Falta generar un id porque el user puede poner dos tareas con el mismo nombre y daría error y para poder Eliminar tareas a través de su id. Además la consola se queja de que el key no es único*/
  
   const taskList = tasksObj.map((task) => (
-    <li key={task.taskName} className="item">
+    <li key={task.taskName} className={`item ${completedTask}`}>
       <div className='item__nameTask'>
-        <button className='item__nameTask__check' onClick={handleCompleteTask} id={task.taskName}>
-          ✅
-        </button>
+        <form>
+          <input type="checkbox" name="checkbox" id="checkbox" defaultChecked={isChecked} className="item__nameTask__check" onClick={handleCompleteTask} />
+        </form>
         <p>{task.taskName}</p>
       </div>
       <button className='item__button' onClick={handleDeleteTask} id={task.taskName}>

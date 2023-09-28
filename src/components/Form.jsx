@@ -13,7 +13,7 @@ const Form = ({ Link, newTaskObj, saveTask }) => {
     <>
       <section className='formSection'>
         <form className="form">
-          <h2 className="form__title">Nueva tarea</h2>
+          <h2 className="form__title">Añadir tarea</h2>
           <input
             className="form__input"
             type="text"

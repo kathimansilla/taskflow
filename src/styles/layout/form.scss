@@ -27,14 +27,12 @@
         border-radius: 20%;
         background-color: transparent;
         font-size: .8rem;
-        transition: font-size 1s ease;
         font-family: $fontGeneral;
         &:hover {
             background-color: white;
             cursor:pointer;
             border-color: antiquewhite;
             color: gray;
-            font-size: .9rem;
         }
     }
     &__link {

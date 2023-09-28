@@ -7,7 +7,7 @@
   justify-content: center;
   align-items: center;
   height: 80vh;
-  gap: 20px;
+  gap: 10px;
   &__emptyMsg {
     font-family: $fontGeneral;
     &--hidden {
@@ -19,21 +19,30 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    gap: 10px;
+    margin-bottom: 50px;
     & .item {
       display: flex;
       flex-direction: column;
+      padding: 5px;
+      &.completedTask {
+        background-color: rgb(126, 255, 255);
+      }
+      &:hover {
+        border: solid 1px gray;
+        padding: 3px 15px 3px 10px;
+        border-radius: 10%;
+        & .item__button {
+          display: block;
+          align-self: end;
+        }
+      }
       &__nameTask {
         font-family: $fontGeneral;
         display: flex;
         justify-content: center;
         gap: 10px;
         cursor: pointer;
-        &:hover {
-          & ~ .item__button {
-            display: block;
-            align-self: end;
-          }
-        }
         &__check {
           border: none;
           background-color: transparent;
@@ -43,7 +52,8 @@
         display: none;
         background-color: transparent;
         border: none;
-        margin-bottom: 5px;
+        margin: 5px 0;
+        font-size: .7rem;
         &:hover {
           display: block;
           align-self: end;
@@ -65,3 +75,4 @@
     }
   }
 }
+
