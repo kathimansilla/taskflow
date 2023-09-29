@@ -1,4 +1,4 @@
-const Modal = ({ taskName, hiddenClass, deleteTask, idTaskToDelete, switchHiddenClass, taskNameToDelete }) => {
+const Modal = ({ hiddenClass, deleteTask, idTaskToDelete, switchHiddenClass, taskNameToDelete }) => {
 
     //functions
     const handleConfirmDelete = () => {

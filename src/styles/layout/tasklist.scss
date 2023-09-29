@@ -19,29 +19,30 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     gap: 10px;
-    margin-bottom: 50px;
+    margin: 0 15% 2%;
     & .item {
       display: flex;
       flex-direction: column;
+      width: 100%;
       padding: 5px;
       &.completedTask {
-        background-color: rgb(126, 255, 255);
+        background-color: rgb(139, 252, 252);
       }
       &:hover {
         border: solid 1px gray;
-        padding: 3px 15px 3px 10px;
-        border-radius: 10%;
-        & .item__button {
-          display: block;
+        padding: 3px 1px 3px 10px;
+        border-radius: 5%;
+        & .item__buttons {
+          display: flex;
           align-self: end;
         }
       }
       &__nameTask {
         font-family: $fontGeneral;
         display: flex;
-        justify-content: center;
+        justify-content: start;
         gap: 10px;
         cursor: pointer;
         &__check {
@@ -49,19 +50,25 @@
           background-color: transparent;
         }
       }
+      &__buttons {
+       display: none;
       &__button {
-        display: none;
         background-color: transparent;
         border: none;
         margin: 5px 0;
         font-size: .7rem;
         &:hover {
-          display: block;
           align-self: end;
           color: red;
           cursor: pointer;
         }
+        &--edit {
+          &:hover {
+            color: gray;
+          }
+        }
       }
+    }
     }
   }
   &__link {

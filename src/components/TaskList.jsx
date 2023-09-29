@@ -5,6 +5,7 @@ const TaskList = ({ Link, tasksObj, deleteTask, toggleCompletedTask }) => {
   //state variables
   const [hiddenClass, setHiddenClass] = useState(true);
   const [idTaskToDelete, setIdTaskToDelete] = useState();
+  const [indexTaskToEdit, setIndexTaskToEdit] = useState();
   const [taskNameToDelete, setTaskNameToDelete] = useState('');
 
   //variables
@@ -14,9 +15,25 @@ const TaskList = ({ Link, tasksObj, deleteTask, toggleCompletedTask }) => {
       : 'taskListSection__emptyMsg--hidden';
 
   //functions
+  const handleSaveEdit = (ev) => {
+    ev.preventDefault();
+    //Editar tarea dentro de taskObj
+    /*tasksObj[indexTaskToEdit].taskName */
+  };
+
+  const handleEditTask = (ev) => {
+    ev.preventDefault();
+    parseInt(ev.target.id);
+    const taskToEdit = tasksObj.findIndex((task) => task.idTask === parseInt(ev.target.id));
+    setIndexTaskToEdit(taskToEdit);
+  };
+  
   const handleDeleteTask = (ev) => {
-    //Busco la tarea a eliminar para pasar su nombre a Modal
-    const clickedTask = tasksObj.find((task) => task.idTask === parseInt(ev.target.id));
+    ev.preventDefault();
+    //Busco la tarea a eliminar para pasar su nombre a <Modal />
+    const clickedTask = tasksObj.find(
+      (task) => task.idTask === parseInt(ev.target.id)
+    );
     setTaskNameToDelete(clickedTask.taskName);
     switchHiddenClass();
     const idTaskParseInt = parseInt(ev.target.id);
@@ -47,17 +64,35 @@ const TaskList = ({ Link, tasksObj, deleteTask, toggleCompletedTask }) => {
             className="item__nameTask__check"
             onClick={handleCompleteTask}
           />
+          <input className='editInputName editInputName--hidden' type="text" placeholder='Nuevo nombre' />
+          <input type="submit" className="item__nameTask__buttonSave" onClick={handleSaveEdit} value="Guardar" />
         </form>
-        <p>{task.taskName}</p>
+        <p className='item__nameTask__nameHidden'>{task.taskName}</p>
       </div>
-      <button
-        className="item__button"
-        onClick={handleDeleteTask}
-        id={task.idTask}
-      >
-        Elimnar
-      </button>
-      <Modal hiddenClass={hiddenClass} taskName={task.taskName} deleteTask={deleteTask} idTaskToDelete={idTaskToDelete} switchHiddenClass={switchHiddenClass} taskNameToDelete={taskNameToDelete} />
+      <div className="item__buttons">
+        <button
+          className="item__buttons__button"
+          onClick={handleDeleteTask}
+          id={task.idTask}
+        >
+          Elimnar
+        </button>
+        <button
+          className="item__buttons__button item__buttons__button--edit"
+          onClick={handleEditTask}
+          id={task.idTask}
+        >
+          Editar
+        </button>
+      </div>
+      <Modal
+        hiddenClass={hiddenClass}
+        taskName={task.taskName}
+        deleteTask={deleteTask}
+        idTaskToDelete={idTaskToDelete}
+        switchHiddenClass={switchHiddenClass}
+        taskNameToDelete={taskNameToDelete}
+      />
     </li>
   ));
 
