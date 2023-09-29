@@ -14,7 +14,7 @@ function App() {
   // state variables
   const [idTask, setIdTask] = useState(0);
   const [tasksObj, setTasksObj] = useState([]);
-  const [newTask, setNewTask] = useState({taskName: ''});
+  const [newTask, setNewTask] = useState({ taskName: '' });
   const [emptyInputClass, setEmptyInputClass] = useState('');
 
   //functions
@@ -35,11 +35,11 @@ function App() {
       setEmptyInputClass('emptyInput');
     } else {
       setIdTask(idTask + 1);
-      const newTaskWhitId = {...newTask, idTask: idTask};
+      const newTaskWhitId = { ...newTask, idTask: idTask };
       const newTaskToArray = [...tasksObj, newTaskWhitId];
       setTasksObj(newTaskToArray);
       setEmptyInputClass('');
-      setNewTask({taskName: ''});
+      setNewTask({ taskName: '' });
       //save in DDBB
     }
   };
@@ -81,7 +81,13 @@ function App() {
           <Route
             path="/NewTask"
             element={
-              <Form Link={Link} newTaskObj={newTaskObj} newTask={newTask} saveTask={saveTask} emptyInputClass={emptyInputClass} />
+              <Form
+                Link={Link}
+                newTaskObj={newTaskObj}
+                newTask={newTask}
+                saveTask={saveTask}
+                emptyInputClass={emptyInputClass}
+              />
             }
           />
           <Route

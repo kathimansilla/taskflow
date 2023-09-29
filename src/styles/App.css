@@ -3,4 +3,5 @@
 @import './layout/landing.scss';
 @import './layout/form.scss';
 @import './layout/tasklist.scss';
+@import './layout/modal.scss';
 @import './layout/footer.scss';
