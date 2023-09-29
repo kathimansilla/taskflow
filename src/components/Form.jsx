@@ -1,4 +1,4 @@
-const Form = ({ Link, newTaskObj, saveTask }) => {
+const Form = ({ Link, newTaskObj, saveTask, emptyInputClass }) => {
   //functions
   const handleSubmit = (ev) => {
     ev.preventDefault();
@@ -15,7 +15,7 @@ const Form = ({ Link, newTaskObj, saveTask }) => {
         <form className="form">
           <h2 className="form__title">Añadir tarea</h2>
           <input
-            className="form__input"
+            className={`form__input ${emptyInputClass}`}
             type="text"
             placeholder="Nombre de la tarea"
             name="taskName"

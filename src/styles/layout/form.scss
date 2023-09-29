@@ -19,32 +19,36 @@
       font-family: $fontGeneral;
     }
     &__input {
-        &:hover {
-            box-shadow: 5px 3px 3px black;
-        }
+      &:hover {
+        box-shadow: 5px 3px 3px black;
+      }
+      &.emptyInput {
+        border: 1.5px solid red;
+        box-shadow: 1px 1px 1px red;
+      }
     }
     &__buttonSave {
-        border-radius: 20%;
-        background-color: transparent;
-        font-size: .8rem;
-        font-family: $fontGeneral;
-        &:hover {
-            background-color: white;
-            cursor:pointer;
-            border-color: antiquewhite;
-            color: gray;
-        }
+      border-radius: 20%;
+      background-color: transparent;
+      font-size: 0.8rem;
+      font-family: $fontGeneral;
+      &:hover {
+        background-color: white;
+        cursor: pointer;
+        border-color: antiquewhite;
+        color: gray;
+      }
     }
     &__link {
-        text-decoration: none;
-        color: black;
-        font-size: .8rem;
-        transition: font-size 1s ease;
-        font-family: $fontGeneral;
-        &:hover {
-            color: gray;
-            font-size: .9rem;
-        }
+      text-decoration: none;
+      color: black;
+      font-size: 0.8rem;
+      transition: font-size 1s ease;
+      font-family: $fontGeneral;
+      &:hover {
+        color: gray;
+        font-size: 0.9rem;
+      }
     }
   }
 }
