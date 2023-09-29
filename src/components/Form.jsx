@@ -1,4 +1,4 @@
-const Form = ({ Link, newTaskObj, saveTask, emptyInputClass }) => {
+const Form = ({ Link, newTaskObj, newTask, saveTask, emptyInputClass }) => {
   //functions
   const handleSubmit = (ev) => {
     ev.preventDefault();
@@ -20,7 +20,7 @@ const Form = ({ Link, newTaskObj, saveTask, emptyInputClass }) => {
             placeholder="Nombre de la tarea"
             name="taskName"
             id="taskName"
-            value={newTaskObj.taskName}
+            value={newTask.taskName}
             onInput={handleInput}
           />
           <input type="submit" onClick={handleSubmit} value="Guardar" className="form__buttonSave" />
