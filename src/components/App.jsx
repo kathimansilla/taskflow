@@ -64,10 +64,10 @@ function App() {
     ls.set('data', tasksObj);
   }, [tasksObj]);
 
-  //Por ahora está funcionando con taskName en lugar de taskId
+  //Eliminar tarea
   const deleteTask = (taskId) => {
     console.log(taskId);
-    const cleanTaskObj = tasksObj.filter((task) => task.taskName !== taskId);
+    const cleanTaskObj = tasksObj.filter((task) => task.idTask !== taskId);
     setTasksObj(cleanTaskObj);
     ls.remove(taskId);
   };

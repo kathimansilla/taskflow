@@ -4,7 +4,9 @@ const TaskList = ({ Link, tasksObj, deleteTask, toggleCompletedTask }) => {
 
   //functions
   const handleDeleteTask = (ev) => {
-    deleteTask(ev.target.id);
+    showModal();
+    const idTaskParseInt = parseInt(ev.target.id);
+    deleteTask(idTaskParseInt);
   };
 
   const handleCompleteTask = (ev) => {
@@ -20,7 +22,7 @@ const TaskList = ({ Link, tasksObj, deleteTask, toggleCompletedTask }) => {
         </form>
         <p>{task.taskName}</p>
       </div>
-      <button className='item__button' onClick={handleDeleteTask} id={task.taskName}>
+      <button className='item__button' onClick={handleDeleteTask} id={task.idTask}>
         Elimnar
       </button>
     </li>
@@ -30,6 +32,7 @@ const TaskList = ({ Link, tasksObj, deleteTask, toggleCompletedTask }) => {
     <section className='taskListSection'>
       <p className={emptyMsgClass}>¡No tienes tareas pendientes!</p>
       <ul className="taskListSection__ul">{taskList}</ul>
+      <dialog><p>Hola</p></dialog>
       <Link to="/NewTask" className='taskListSection__link'>
         añadir tarea
       </Link>
