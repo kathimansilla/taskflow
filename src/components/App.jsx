@@ -13,10 +13,12 @@ import ls from '../services/ls';
 function App() {
   // state variables
   const [idTask, setIdTask] = useState(0);
-  const [tasksObj, setTasksObj] = useState([]);
+  const [tasksObj, setTasksObj] = useState(ls.get('data', []));
   const [newTask, setNewTask] = useState({ taskName: '' });
   const [emptyInputClass, setEmptyInputClass] = useState('');
   const [taskToEdit, setTaskToEdit] = useState({ taskName: '', edit: false });
+
+  console.log(ls.get('data', []).length - 1);
 
   //functions
   const editTask = (keyName, value) => {
@@ -33,7 +35,6 @@ function App() {
     setTaskToEdit(taskEditTrue);
   };
 
-
   const newTaskObj = (keyName, value) => {
     const newData = {
       ...newTask,
@@ -47,22 +48,26 @@ function App() {
 
   /*con esta función se guarda la tarea en el Array de tareas y en localstorage y DDBB y se indica la clase que valida si los inputs están completados o no*/
   const saveTask = () => {
-    if ((newTask.taskName === '' || newTask.taskName === undefined) && !taskToEdit.edit) {
+    if (
+      (newTask.taskName === '' || newTask.taskName === undefined) &&
+      !taskToEdit.edit
+    ) {
       setEmptyInputClass('emptyInput');
     } else if (taskToEdit.edit) {
       if (taskToEdit.taskName === '') {
         setEmptyInputClass('emptyInput');
       } else {
-      const taskToEditClone = { ...taskToEdit, edit: false };
-      const taskObjClone = [...tasksObj];
-      const indexTaskToEdit = taskObjClone.findIndex((task) => task.idTask === taskToEdit.idTask);
-      taskObjClone.splice(indexTaskToEdit, 1, taskToEditClone);
-      setTasksObj(taskObjClone);
-      setEmptyInputClass('');
-      setTaskToEdit({ taskName: '' });
-      //save in DDBB
+        const taskToEditClone = { ...taskToEdit, edit: false };
+        const taskObjClone = [...tasksObj];
+        const indexTaskToEdit = taskObjClone.findIndex(
+          (task) => task.idTask === taskToEdit.idTask
+        );
+        taskObjClone.splice(indexTaskToEdit, 1, taskToEditClone);
+        setTasksObj(taskObjClone);
+        setEmptyInputClass('');
+        setTaskToEdit({ taskName: '' });
+        //save in DDBB
       }
-   
     } else {
       setIdTask(idTask + 1);
       const newTaskWhitId = { ...newTask, idTask: idTask };
@@ -92,7 +97,18 @@ function App() {
   //useEffect
   useEffect(() => {
     ls.set('data', tasksObj);
+    if (tasksObj.length === 0) {
+      setIdTask(0);
+    } else {
+      const indexLastTask = tasksObj.length - 1;
+      const lastTask = tasksObj[indexLastTask];
+      const lastIdTask = lastTask.idTask;
+      setIdTask(lastIdTask + 1);
+      console.log(lastIdTask);
+    }
   }, [tasksObj]);
+
+  
 
   //Eliminar tarea
   const deleteTask = (taskId) => {
