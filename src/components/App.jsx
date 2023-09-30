@@ -97,6 +97,9 @@ function App() {
   //useEffect
   useEffect(() => {
     ls.set('data', tasksObj);
+  }, [tasksObj]);
+
+  useEffect(() => {
     if (tasksObj.length === 0) {
       setIdTask(0);
     } else {
@@ -106,7 +109,7 @@ function App() {
       setIdTask(lastIdTask + 1);
       console.log(lastIdTask);
     }
-  }, [tasksObj]);
+  }, []);
 
   
 

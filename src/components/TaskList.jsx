@@ -59,7 +59,7 @@ const TaskList = ({ Link, tasksObj, deleteTask, toggleCompletedTask, getTaskToEd
             onClick={handleCompleteTask}
           />
         </form>
-        <p className="item__nameTask__nameHidden">{task.taskName}</p>
+        <p className={`item__nameTask__name ${task.isCompleted ? 'completedTask' : ''}`}>{task.taskName}</p>
       </div>
       <div className="item__buttons">
         <button
@@ -71,7 +71,7 @@ const TaskList = ({ Link, tasksObj, deleteTask, toggleCompletedTask, getTaskToEd
         </button>
         <Link
           to="/NewTask"
-          className="item__buttons__button item__buttons__button--edit"
+          className="item__buttons__button--edit"
           onClick={handleEditTask}
           id={task.idTask}
         >
