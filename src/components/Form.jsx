@@ -1,5 +1,10 @@
-const Form = ({ Link, newTaskObj, newTask, saveTask, emptyInputClass, taskToEdit, editTask }) => {
+const Form = ({ Link, newTaskObj, newTask, saveTask, emptyInputClass, taskToEdit, editTask, resetForm }) => {
   //functions
+  const handleCancel = (ev) => {
+    ev.preventDefault();
+    resetForm();
+  };
+
   const handleSubmit = (ev) => {
     ev.preventDefault();
     saveTask();
@@ -24,10 +29,11 @@ const Form = ({ Link, newTaskObj, newTask, saveTask, emptyInputClass, taskToEdit
             placeholder="Nombre de la tarea"
             name="taskName"
             id="taskName"
-            value={newTask.taskName || taskToEdit.taskName}
+            value={newTask.taskName || taskToEdit.taskName || ''}
             onInput={handleInput}
           />
-          <input type="submit" onClick={handleSubmit} value="Guardar" className="form__buttonSave" />
+          <input type="submit" onClick={handleSubmit} value="Guardar" className="form__button" />
+          <input type="submit" onClick={handleCancel} value="Cancelar" className="form__button form__button--cancel" />
         </form>
         <Link to="/TasksList" className='form__link'>lista de tareas</Link>
         <Link to="/" className='form__link'>inicio</Link>

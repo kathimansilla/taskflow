@@ -27,7 +27,7 @@
         box-shadow: 1px 1px 1px red;
       }
     }
-    &__buttonSave {
+    &__button {
       border-radius: 20%;
       background-color: transparent;
       font-size: 0.8rem;
@@ -37,6 +37,14 @@
         cursor: pointer;
         border-color: antiquewhite;
         color: gray;
+      }
+      &--cancel {
+        &:hover {
+          background-color: white;
+          cursor: pointer;
+          border-color: red;
+          color: red;
+        }
       }
     }
     &__link {
