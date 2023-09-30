@@ -1,4 +1,4 @@
-const Form = ({ Link, newTaskObj, newTask, saveTask, emptyInputClass }) => {
+const Form = ({ Link, newTaskObj, newTask, saveTask, emptyInputClass, taskToEdit }) => {
   //functions
   const handleSubmit = (ev) => {
     ev.preventDefault();
@@ -6,7 +6,12 @@ const Form = ({ Link, newTaskObj, newTask, saveTask, emptyInputClass }) => {
   };
 
   const handleInput = (ev) => {
-    newTaskObj(ev.target.id, ev.target.value);
+    if (taskToEdit.taskName === '') {
+      return newTaskObj(ev.target.id, ev.target.value);
+    } else {
+      // editedTask editando taskToEdit
+      return newTaskObj(ev.target.id, ev.target.value);
+    }
   };
 
   return (
@@ -20,7 +25,7 @@ const Form = ({ Link, newTaskObj, newTask, saveTask, emptyInputClass }) => {
             placeholder="Nombre de la tarea"
             name="taskName"
             id="taskName"
-            value={newTask.taskName}
+            value={newTask.taskName || taskToEdit.taskName}
             onInput={handleInput}
           />
           <input type="submit" onClick={handleSubmit} value="Guardar" className="form__buttonSave" />

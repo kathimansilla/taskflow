@@ -16,8 +16,21 @@ function App() {
   const [tasksObj, setTasksObj] = useState([]);
   const [newTask, setNewTask] = useState({ taskName: '' });
   const [emptyInputClass, setEmptyInputClass] = useState('');
+  const [taskToEdit, setTaskToEdit] = useState({ taskName: '' });
 
   //functions
+  const editTask = (keyName, value) => {
+    const editData = {
+      ...taskToEdit
+    }
+  }
+
+  const getTaskToEdit = (taskId) => {
+    const taskToEditLocal = tasksObj.find((task) => task.idTask === taskId);
+    setTaskToEdit(taskToEditLocal);
+  };
+
+
   const newTaskObj = (keyName, value) => {
     const newData = {
       ...newTask,
@@ -40,6 +53,7 @@ function App() {
       setTasksObj(newTaskToArray);
       setEmptyInputClass('');
       setNewTask({ taskName: '' });
+      setTaskToEdit({ taskName: '' });
       //save in DDBB
     }
   };
@@ -87,6 +101,7 @@ function App() {
                 newTask={newTask}
                 saveTask={saveTask}
                 emptyInputClass={emptyInputClass}
+                taskToEdit={taskToEdit}
               />
             }
           />
@@ -98,6 +113,7 @@ function App() {
                 tasksObj={tasksObj}
                 deleteTask={deleteTask}
                 toggleCompletedTask={toggleCompletedTask}
+                getTaskToEdit={getTaskToEdit}
               />
             }
           />
