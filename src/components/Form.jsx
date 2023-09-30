@@ -1,4 +1,4 @@
-const Form = ({ Link, newTaskObj, newTask, saveTask, emptyInputClass, taskToEdit }) => {
+const Form = ({ Link, newTaskObj, newTask, saveTask, emptyInputClass, taskToEdit, editTask }) => {
   //functions
   const handleSubmit = (ev) => {
     ev.preventDefault();
@@ -6,10 +6,9 @@ const Form = ({ Link, newTaskObj, newTask, saveTask, emptyInputClass, taskToEdit
   };
 
   const handleInput = (ev) => {
-    if (taskToEdit.taskName === '') {
-      return newTaskObj(ev.target.id, ev.target.value);
+    if (taskToEdit.edit) {
+      return editTask(ev.target.id, ev.target.value);
     } else {
-      // editedTask editando taskToEdit
       return newTaskObj(ev.target.id, ev.target.value);
     }
   };

@@ -16,18 +16,22 @@ function App() {
   const [tasksObj, setTasksObj] = useState([]);
   const [newTask, setNewTask] = useState({ taskName: '' });
   const [emptyInputClass, setEmptyInputClass] = useState('');
-  const [taskToEdit, setTaskToEdit] = useState({ taskName: '' });
+  const [taskToEdit, setTaskToEdit] = useState({ taskName: '', edit: false });
 
   //functions
   const editTask = (keyName, value) => {
     const editData = {
-      ...taskToEdit
-    }
-  }
+      ...taskToEdit,
+      [keyName]: value,
+    };
+    setTaskToEdit(editData);
+    console.log(editData);
+  };
 
   const getTaskToEdit = (taskId) => {
     const taskToEditLocal = tasksObj.find((task) => task.idTask === taskId);
-    setTaskToEdit(taskToEditLocal);
+    const taskEditTrue = { ...taskToEditLocal, edit: true };
+    setTaskToEdit(taskEditTrue);
   };
 
 
@@ -37,15 +41,21 @@ function App() {
       [keyName]: value,
       idTask: idTask,
       isCompleted: false,
+      edit: false,
     };
     setNewTask(newData);
   };
 
   /*con esta función se guarda la tarea en el Array de tareas y en localstorage y DDBB y se indica la clase que valida si los inputs están completados o no*/
   const saveTask = () => {
-    console.log(newTask);
-    if (newTask.taskName === '' || newTask.taskName === undefined) {
+    if ((newTask.taskName === '' || newTask.taskName === undefined) && !taskToEdit.edit) {
       setEmptyInputClass('emptyInput');
+    } else if (taskToEdit.edit) {
+      const taskObjClone = [...tasksObj];
+      const indexTaskToEdit = taskObjClone.findIndex((task) => task.idTask === taskToEdit.idTask);
+      taskObjClone.splice(indexTaskToEdit, 1, taskToEdit);
+      setTasksObj(taskObjClone);
+      setEmptyInputClass('');
     } else {
       setIdTask(idTask + 1);
       const newTaskWhitId = { ...newTask, idTask: idTask };
@@ -102,6 +112,7 @@ function App() {
                 saveTask={saveTask}
                 emptyInputClass={emptyInputClass}
                 taskToEdit={taskToEdit}
+                editTask={editTask}
               />
             }
           />
