@@ -5,7 +5,6 @@ const TaskList = ({ Link, tasksObj, deleteTask, toggleCompletedTask, getTaskToEd
   //state variables
   const [hiddenClass, setHiddenClass] = useState(true);
   const [idTaskToDelete, setIdTaskToDelete] = useState();
-  //const [taskToEdit, setTaskToEdit] = useState();
   const [taskNameToDelete, setTaskNameToDelete] = useState('');
 
   //variables
@@ -15,30 +14,12 @@ const TaskList = ({ Link, tasksObj, deleteTask, toggleCompletedTask, getTaskToEd
       : 'taskListSection__emptyMsg--hidden';
 
   //functions
-  /*const handleSaveEdit = (ev) => {
-    ev.preventDefault();
-    //Editar tarea dentro de taskObj
-    /*tasksObj[indexTaskToEdit].taskName 
-  };*/
-
-  /*const handleEditTask = (ev) => {
-    ev.preventDefault();
-    parseInt(ev.target.id);
-    const taskToEdit = tasksObj.findIndex(
-      (task) => task.idTask === parseInt(ev.target.id)
-    );
-    setIndexTaskToEdit(taskToEdit);
-  };*/
-
   const handleEditTask = (ev) => {
     parseInt(ev.target.id);
     const indexTaskToEdit = tasksObj.findIndex(
       (task) => task.idTask === parseInt(ev.target.id)
     );
-    console.log(indexTaskToEdit);
     getTaskToEdit(indexTaskToEdit);
-    //llamar a la función getTaskToEdit que está en App y le pasa el resultado a Form
-    //setTaskToEdit(taskToEdit);
   };
 
   const handleDeleteTask = (ev) => {
@@ -77,8 +58,6 @@ const TaskList = ({ Link, tasksObj, deleteTask, toggleCompletedTask, getTaskToEd
             className="item__nameTask__check"
             onClick={handleCompleteTask}
           />
-          {/*<input className='editInputName editInputName--hidden' type="text" placeholder='Nuevo nombre' />
-          <input type="submit" className="item__nameTask__buttonSave" onClick={handleSaveEdit} value="Guardar" />*/}
         </form>
         <p className="item__nameTask__nameHidden">{task.taskName}</p>
       </div>

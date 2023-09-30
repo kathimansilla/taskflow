@@ -25,7 +25,6 @@ function App() {
       [keyName]: value,
     };
     setTaskToEdit(editData);
-    console.log(editData);
   };
 
   const getTaskToEdit = (taskId) => {
@@ -51,11 +50,19 @@ function App() {
     if ((newTask.taskName === '' || newTask.taskName === undefined) && !taskToEdit.edit) {
       setEmptyInputClass('emptyInput');
     } else if (taskToEdit.edit) {
+      if (taskToEdit.taskName === '') {
+        setEmptyInputClass('emptyInput');
+      } else {
+      const taskToEditClone = { ...taskToEdit, edit: false };
       const taskObjClone = [...tasksObj];
       const indexTaskToEdit = taskObjClone.findIndex((task) => task.idTask === taskToEdit.idTask);
-      taskObjClone.splice(indexTaskToEdit, 1, taskToEdit);
+      taskObjClone.splice(indexTaskToEdit, 1, taskToEditClone);
       setTasksObj(taskObjClone);
       setEmptyInputClass('');
+      setTaskToEdit({ taskName: '' });
+      //save in DDBB
+      }
+   
     } else {
       setIdTask(idTask + 1);
       const newTaskWhitId = { ...newTask, idTask: idTask };
@@ -63,7 +70,6 @@ function App() {
       setTasksObj(newTaskToArray);
       setEmptyInputClass('');
       setNewTask({ taskName: '' });
-      setTaskToEdit({ taskName: '' });
       //save in DDBB
     }
   };
