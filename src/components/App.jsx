@@ -46,6 +46,7 @@ function App() {
       idTask: idTask,
       isCompleted: false,
       edit: false,
+      isChecked: false,
     };
     setNewTask(newData);
   };
@@ -105,6 +106,14 @@ function App() {
     }
   };
 
+  //con esta función se modifica la propiedad checked del objeto task
+  const toggleCheckedTask = (idTask) => {
+    const checkedTaskIndex = tasksObj.findIndex((task) => task.idTask === idTask);
+    const taskObjClone = [ ...tasksObj  ];
+    taskObjClone[checkedTaskIndex].isChecked = !taskObjClone[checkedTaskIndex].isChecked;
+    setTasksObj(taskObjClone);
+  };
+
   //useEffect
   useEffect(() => {
     ls.set('data', tasksObj);
@@ -162,6 +171,7 @@ function App() {
                 deleteTask={deleteTask}
                 toggleCompletedTask={toggleCompletedTask}
                 getTaskToEdit={getTaskToEdit}
+                toggleCheckedTask={toggleCheckedTask}
               />
             }
           />
