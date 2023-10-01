@@ -1,7 +1,12 @@
-const Form = ({ Link, newTaskObj, newTask, saveTask, emptyInputClass, taskToEdit, editTask, resetForm }) => {
+const Form = ({ Link, newTaskObj, newTask, saveTask, emptyInputClass, taskToEdit, editTask, resetForm, getIndexElementArray }) => {
   //functions
   const handleCancel = (ev) => {
     ev.preventDefault();
+    const indexTaskToEdit = getIndexElementArray(taskToEdit.idTask);;
+    resetForm(indexTaskToEdit);
+  };
+
+  const handleLink = (ev) => {
     resetForm();
   };
 
@@ -35,10 +40,11 @@ const Form = ({ Link, newTaskObj, newTask, saveTask, emptyInputClass, taskToEdit
           <input type="submit" onClick={handleSubmit} value="Guardar" className="form__button" />
           <input type="submit" onClick={handleCancel} value="Cancelar" className="form__button form__button--cancel" />
         </form>
-        <Link to="/TasksList" className='form__link'>lista de tareas</Link>
-        <Link to="/" className='form__link'>inicio</Link>
+        <Link to="/TasksList" onClick={handleLink} className='form__link'>lista de tareas</Link>
+        <Link to="/" onClick={handleLink} className='form__link'>inicio</Link>
       </section>
     </>
   );
 };
+
 export default Form;

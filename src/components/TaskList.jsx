@@ -31,8 +31,15 @@ const TaskList = ({
   //functions
   //sadado noche = handleSelectedTask --> checked
   const handleSelectedTask = (ev) => {
+    console.log('estoy en handleSelectedTask');
     const idClickedTask = parseInt(ev.currentTarget.id);
+    console.log(idClickedTask);
     toggleCheckedTask(idClickedTask);
+    setIdSelectedTask(idClickedTask);
+  };
+
+  const handleCheckedTask = (ev) => {
+    const idClickedTask = parseInt(ev.target.id);
     if (idSelectedTask === undefined) {
       setIdSelectedTask(idClickedTask);
     } else {
@@ -42,12 +49,8 @@ const TaskList = ({
   };
 
   const handleEditTask = (ev) => {
-    /*parseInt(ev.target.id);
-    const indexTaskToEdit = tasksObj.findIndex(
-      (task) => task.idTask === parseInt(ev.target.id)
-    );
-    getTaskToEdit(indexTaskToEdit);*/
     const indexTaskToEdit = getIndexElementArray(idSelectedTask);
+    console.log(indexTaskToEdit);
     getTaskToEdit(indexTaskToEdit);
     navigate("/NewTask");
   };
@@ -55,14 +58,6 @@ const TaskList = ({
   const handleDeleteTask = (ev) => {
     ev.preventDefault();
     //Busco la tarea a eliminar para pasar su nombre a <Modal />
-    //esta funcion tiene que trabajar con el idSelectedTask
-    /*const clickedTask = tasksObj.find(
-      (task) => task.idTask === parseInt(ev.target.id)
-    );
-    setTaskNameToDelete(clickedTask.taskName);
-    switchHiddenClass();
-    const idTaskParseInt = parseInt(ev.target.id);
-    setIdTaskToDelete(idTaskParseInt);*/
     const clickedTask = getElementArray(idSelectedTask);
     setTaskNameToDelete(clickedTask.taskName);
     switchHiddenClass();
@@ -76,8 +71,6 @@ const TaskList = ({
 
   const handleCompleteTask = (ev) => {
     ev.preventDefault();
-    /*const idCompletedTask = parseInt(ev.target.id);
-    setIdSelectedTask(idCompletedTask);*/
     toggleCompletedTask(idSelectedTask);
   };
 
@@ -93,7 +86,8 @@ const TaskList = ({
             name="checkbox"
             id={task.idTask}
             className="item__nameTask__check"
-            defaultChecked={task.isChecked}
+            checked={task.isChecked}
+            onChange={handleCheckedTask}
           />
         </form>
         <p
@@ -124,11 +118,6 @@ const TaskList = ({
           <input
             type="checkbox"
             name="checkbox"
-            /*defaultChecked={task.isChecked}
-            id={task.idTask}
-            defaultChecked={task.isCompleted}
-            className="item__nameTask__check"
-  onClick={handleCompleteTask}*/
           />
         </form>
         <button className="item__buttons__button" onClick={handleCompleteTask}>

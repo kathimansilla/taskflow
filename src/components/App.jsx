@@ -28,24 +28,43 @@ function App() {
   };
 
   //specific functions
-  const resetForm = () => {
+  const resetForm = (indexTaskToEdit) => {
     setTaskToEdit({ taskName: '', edit: false });
     setNewTask({ taskName: '' });
     setEmptyInputClass('');
+
+    const updateTaskObj = [...tasksObj];
+      updateTaskObj[indexTaskToEdit].edit =
+        !updateTaskObj[indexTaskToEdit].edit;
+        updateTaskObj[indexTaskToEdit].isChecked =
+        !updateTaskObj[indexTaskToEdit].isChecked;
+        setTasksObj(updateTaskObj);
+        console.log(updateTaskObj);
   };
 
   const editTask = (keyName, value) => {
-    const editData = {
-      ...taskToEdit,
-      [keyName]: value,
+      const editData = {
+            ...taskToEdit,
+            [keyName]: value,
+          };
+          setTaskToEdit(editData);
     };
-    setTaskToEdit(editData);
-  };
+  
+
 
   const getTaskToEdit = (taskId) => {
-    const taskToEditLocal = getElementArray(taskId); 
-    const taskEditTrue = { ...taskToEditLocal, edit: true };
+    const taskToEditLocal = getElementArray(taskId);
+    const IndexTaskToEditLocal = getIndexElementArray(taskId);
+    console.log(taskToEditLocal); 
+    const taskEditTrue = { ...taskToEditLocal, edit: true, isChecked: false };
+    console.log(taskEditTrue);
     setTaskToEdit(taskEditTrue);
+
+    const updateTaskObj = [...tasksObj];
+      updateTaskObj[IndexTaskToEditLocal].edit =
+        !updateTaskObj[IndexTaskToEditLocal].edit;
+        setTasksObj(updateTaskObj);
+        console.log(updateTaskObj);
   };
 
   const newTaskObj = (keyName, value) => {
@@ -115,11 +134,15 @@ function App() {
 
   //con esta función se modifica la propiedad checked del objeto task
   const toggleCheckedTask = (idTask) => {
+    console.log('toggleCheckedTask');
     const checkedTaskIndex = getIndexElementArray(idTask);
-    console.log(checkedTaskIndex);
     const taskObjClone = [ ...tasksObj  ];
+    console.log(taskObjClone);
     taskObjClone[checkedTaskIndex].isChecked = !taskObjClone[checkedTaskIndex].isChecked;
     setTasksObj(taskObjClone);
+    console.log(taskObjClone);
+    console.log(checkedTaskIndex);
+    console.log(tasksObj);
   };
 
   //useEffect
@@ -166,6 +189,7 @@ function App() {
                 taskToEdit={taskToEdit}
                 editTask={editTask}
                 resetForm={resetForm}
+                getIndexElementArray={getIndexElementArray}
               />
             }
           />
@@ -189,6 +213,6 @@ function App() {
       <Footer logo={logo} />
     </>
   );
-}
+};
 
 export default App;
