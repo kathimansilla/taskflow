@@ -18,7 +18,16 @@ function App() {
   const [emptyInputClass, setEmptyInputClass] = useState('');
   const [taskToEdit, setTaskToEdit] = useState({ taskName: '', edit: false });
 
-  //functions
+  //generals functions
+  const getElementArray = (taskId) => {
+    return tasksObj.find((task) => task.idTask === taskId);
+  };
+
+  const getIndexElementArray = (taskId) => {
+    return tasksObj.findIndex((task) => task.idTask === taskId);
+  };
+
+  //specific functions
   const resetForm = () => {
     setTaskToEdit({ taskName: '', edit: false });
     setNewTask({ taskName: '' });
@@ -34,7 +43,7 @@ function App() {
   };
 
   const getTaskToEdit = (taskId) => {
-    const taskToEditLocal = tasksObj.find((task) => task.idTask === taskId);
+    const taskToEditLocal = getElementArray(taskId); 
     const taskEditTrue = { ...taskToEditLocal, edit: true };
     setTaskToEdit(taskEditTrue);
   };
@@ -68,9 +77,7 @@ function App() {
         console.log('estoy en if edit else');
         const taskToEditClone = { ...taskToEdit, edit: false };
         const taskObjClone = [...tasksObj];
-        const indexTaskToEdit = taskObjClone.findIndex(
-          (task) => task.idTask === taskToEdit.idTask
-        );
+        const indexTaskToEdit = getIndexElementArray(taskToEdit.idTask);
         taskObjClone.splice(indexTaskToEdit, 1, taskToEditClone);
         setTasksObj(taskObjClone);
         setEmptyInputClass('');
@@ -93,22 +100,23 @@ function App() {
 
   //con esta función se marca la tarea como completada
   const toggleCompletedTask = (idTask) => {
-    const completedTaskIndex = tasksObj.findIndex(
-      (task) => task.idTask === idTask
-    );
+    const completedTaskIndex = getIndexElementArray(idTask);
     if (completedTaskIndex === -1) {
       console.log('error: no se encontró la tarea');
     } else {
       const updateTaskObj = [...tasksObj];
       updateTaskObj[completedTaskIndex].isCompleted =
         !updateTaskObj[completedTaskIndex].isCompleted;
+        updateTaskObj[completedTaskIndex].isChecked =
+        !updateTaskObj[completedTaskIndex].isChecked;
       setTasksObj(updateTaskObj);
     }
   };
 
   //con esta función se modifica la propiedad checked del objeto task
   const toggleCheckedTask = (idTask) => {
-    const checkedTaskIndex = tasksObj.findIndex((task) => task.idTask === idTask);
+    const checkedTaskIndex = getIndexElementArray(idTask);
+    console.log(checkedTaskIndex);
     const taskObjClone = [ ...tasksObj  ];
     taskObjClone[checkedTaskIndex].isChecked = !taskObjClone[checkedTaskIndex].isChecked;
     setTasksObj(taskObjClone);
@@ -127,7 +135,6 @@ function App() {
       const lastTask = tasksObj[indexLastTask];
       const lastIdTask = lastTask.idTask;
       setIdTask(lastIdTask + 1);
-      console.log(lastIdTask);
     }
   }, []);
 
@@ -172,6 +179,8 @@ function App() {
                 toggleCompletedTask={toggleCompletedTask}
                 getTaskToEdit={getTaskToEdit}
                 toggleCheckedTask={toggleCheckedTask}
+                getIndexElementArray={getIndexElementArray}
+                getElementArray={getElementArray}
               />
             }
           />

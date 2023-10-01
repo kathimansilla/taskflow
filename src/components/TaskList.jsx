@@ -9,7 +9,11 @@ const TaskList = ({
   toggleCompletedTask,
   getTaskToEdit,
   toggleCheckedTask,
+  getIndexElementArray,
+  getElementArray,
 }) => {
+  /*Hacer una función que busque por id el elemento y el index porque lo repito mucho y quizás también para clonar o no?*/
+
   //state variables
   const [hiddenClass, setHiddenClass] = useState(true);
   const [idTaskToDelete, setIdTaskToDelete] = useState();
@@ -27,12 +31,12 @@ const TaskList = ({
   //functions
   //sadado noche = handleSelectedTask --> checked
   const handleSelectedTask = (ev) => {
-    const idClickedTask = parseInt(ev.target.id);
+    const idClickedTask = parseInt(ev.currentTarget.id);
     toggleCheckedTask(idClickedTask);
     if (idSelectedTask === undefined) {
       setIdSelectedTask(idClickedTask);
     } else {
-      setDisabledEditBtn(true);
+      //setDisabledEditBtn(true);
       //setIdSelectedTask([...idSelectedTask, idClickedTask]);
     };
   };
@@ -43,9 +47,7 @@ const TaskList = ({
       (task) => task.idTask === parseInt(ev.target.id)
     );
     getTaskToEdit(indexTaskToEdit);*/
-    const indexTaskToEdit = tasksObj.findIndex(
-      (task) => task.idTask === idSelectedTask
-    );
+    const indexTaskToEdit = getIndexElementArray(idSelectedTask);
     getTaskToEdit(indexTaskToEdit);
     navigate("/NewTask");
   };
@@ -61,7 +63,7 @@ const TaskList = ({
     switchHiddenClass();
     const idTaskParseInt = parseInt(ev.target.id);
     setIdTaskToDelete(idTaskParseInt);*/
-    const clickedTask = tasksObj.find((task) => task.idTask === idSelectedTask);
+    const clickedTask = getElementArray(idSelectedTask);
     setTaskNameToDelete(clickedTask.taskName);
     switchHiddenClass();
     //quizas no sea necesaria la state var idTaskToDelete
@@ -84,15 +86,14 @@ const TaskList = ({
       key={task.idTask}
       className={`item ${task.isCompleted ? 'completedTask' : ''}`}
     >
-      <div className="item__nameTask" onClick={handleSelectedTask}>
+      <div className="item__nameTask" onClick={handleSelectedTask} id={task.idTask}>
         <form>
           <input
             type="checkbox"
             name="checkbox"
             id={task.idTask}
-            defaultChecked={task.isCompleted}
             className="item__nameTask__check"
-            checked={task.checked}
+            defaultChecked={task.isChecked}
           />
         </form>
         <p
@@ -123,7 +124,8 @@ const TaskList = ({
           <input
             type="checkbox"
             name="checkbox"
-            /*id={task.idTask}
+            /*defaultChecked={task.isChecked}
+            id={task.idTask}
             defaultChecked={task.isCompleted}
             className="item__nameTask__check"
   onClick={handleCompleteTask}*/
