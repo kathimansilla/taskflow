@@ -112,16 +112,24 @@ function App() {
   };
 
   //con esta función se marca la tarea como completada
-  const toggleCompletedTask = (idTask) => {
-    const completedTaskIndex = getIndexElementArray(idTask);
-    if (completedTaskIndex === -1) {
+  const toggleCompletedTask = (arrayIdTask) => {
+    console.log(arrayIdTask);
+    //const completedTaskIndex = getIndexElementArray(idTask);
+    if (!arrayIdTask) {
       console.log('error: no se encontró la tarea');
     } else {
-      const updateTaskObj = [...tasksObj];
-      updateTaskObj[completedTaskIndex].isCompleted =
-        !updateTaskObj[completedTaskIndex].isCompleted;
-      updateTaskObj[completedTaskIndex].isChecked = false;
-      setTasksObj(updateTaskObj);
+      /*El map recoge el 'return task'. En cada iteración de map se comprueba si task está incluida en el arraIdTask y, en caso de estar incluida, se hace un clon de task para actualizar las propiedades isCompleted e isChecked. Por lo que, si task no cumple con la condición (if), esta se retorna sin modificaciones. (Esta función también puede hacerse con un bucle for anidado)*/
+      const tasksObjClone = tasksObj.map((task) => {
+        if (arrayIdTask.includes(task.idTask)) {
+          return {
+            ...task,
+            isCompleted: !task.isCompleted,
+            isChecked: false,
+          }
+        };
+        return task;
+      });
+      setTasksObj(tasksObjClone);
     }
   };
 

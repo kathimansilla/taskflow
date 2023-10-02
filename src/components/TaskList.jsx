@@ -23,9 +23,6 @@ const TaskList = ({
   const [disabledBtn, setDisabledBtn] = useState(true);
   const [disabledEditBtn, setDisabledEditBtn] = useState(true);
 
-  console.log(disabledEditBtn);
-  console.log(idSelectedTask.length);
-  console.log(idSelectedTask);
   //variables
   const navigate = useNavigate();
   let emptyMsgClass =
@@ -91,7 +88,7 @@ const TaskList = ({
 
   const handleCompleteTask = (ev) => {
     ev.preventDefault();
-    toggleCompletedTask(idSelectedTask[0]);
+    toggleCompletedTask(idSelectedTask);
     setIdSelectedTask([]);
   };
 
