@@ -152,10 +152,12 @@ function App() {
   }, []);
 
   //Eliminar tarea
-  const deleteTask = (taskId) => {
-    const cleanTaskObj = tasksObj.filter((task) => task.idTask !== taskId);
+  const deleteTask = (arrayTaskId) => {
+    /*includes será false si task.idTask está en arrayTaskId, por lo que esos elementos se eliminarán ya que la función filter devuelve un nuevo array con los elementos que dan como resultado true a la condición dada*/
+    const cleanTaskObj = tasksObj.filter((task) => !arrayTaskId.includes(task.idTask));
+    console.log(cleanTaskObj);  
     setTasksObj(cleanTaskObj);
-    ls.remove(taskId);
+    //ls.remove(taskId);
   };
 
   return (

@@ -17,7 +17,7 @@ const TaskList = ({
 }) => {
   //state variables
   const [hiddenClass, setHiddenClass] = useState(true);
-  const [idTaskToDelete, setIdTaskToDelete] = useState();
+  const [idTaskToDelete, setIdTaskToDelete] = useState([]);
   const [taskNameToDelete, setTaskNameToDelete] = useState('');
   const [idSelectedTask, setIdSelectedTask] = useState([]);
   const [disabledBtn, setDisabledBtn] = useState(true);
@@ -35,9 +35,9 @@ const TaskList = ({
 
   //useEffect
   useEffect(() => {
-      setDisabledBtn(idSelectedTask.length === 0 ? true : false);
-      setDisabledEditBtn(idSelectedTask.length === 1 ? true : false);
-    }, [idSelectedTask]);
+    setDisabledBtn(idSelectedTask.length === 0 ? true : false);
+    setDisabledEditBtn(idSelectedTask.length === 1 ? true : false);
+  }, [idSelectedTask]);
 
   //functions
   const handleSelectedTask = (ev) => {
@@ -53,6 +53,7 @@ const TaskList = ({
     }
   };
 
+  /*para que la propiedad checked sea controlable, el input necesita escuchar un evento*/
   const handleCheckedTask = (ev) => {
     const idClickedTask = parseInt(ev.target.id);
     if (idSelectedTask.length === 0) {
@@ -60,22 +61,27 @@ const TaskList = ({
     } else {
       //setDisabledEditBtn(true);
       //setIdSelectedTask([...idSelectedTask, idClickedTask]);
-    };
+    }
   };
 
   const handleEditTask = () => {
     getTaskToEdit(idSelectedTask[0]);
-    navigate("/NewTask");
+    navigate('/NewTask');
   };
 
   const handleDeleteTask = (ev) => {
     ev.preventDefault();
     //Busco la tarea a eliminar para pasar su nombre a <Modal />
-    const clickedTask = getElementArray(idSelectedTask[0]);
-    setTaskNameToDelete(clickedTask.taskName);
-    switchHiddenClass();
+    if (idSelectedTask.length === 1) {
+      const clickedTask = getElementArray(idSelectedTask[0]);
+      setTaskNameToDelete(clickedTask.taskName);
+      switchHiddenClass();
+    } else {
+      setTaskNameToDelete('las tareas seleccionadas');
+      switchHiddenClass();
+    }
     //quizas no sea necesaria la state var idTaskToDelete
-    setIdTaskToDelete(idSelectedTask[0]);
+    setIdTaskToDelete(idSelectedTask);
     setIdSelectedTask([]);
   };
 
@@ -94,7 +100,11 @@ const TaskList = ({
       key={task.idTask}
       className={`item ${task.isCompleted ? 'completedTask' : ''}`}
     >
-      <div className="item__nameTask" onClick={handleSelectedTask} id={task.idTask}>
+      <div
+        className="item__nameTask"
+        onClick={handleSelectedTask}
+        id={task.idTask}
+      >
         <form>
           <input
             type="checkbox"
@@ -118,6 +128,7 @@ const TaskList = ({
         taskName={task.taskName}
         deleteTask={deleteTask}
         idTaskToDelete={idTaskToDelete}
+        idSelectedTask={idSelectedTask}
         switchHiddenClass={switchHiddenClass}
         taskNameToDelete={taskNameToDelete}
         toggleCheckedTask={toggleCheckedTask}
@@ -128,29 +139,47 @@ const TaskList = ({
   return (
     <section className="taskListSection">
       <p className={emptyMsgClass}>¡No tienes tareas pendientes!</p>
-      <ul className={`taskListSection__ul ${noTask ? 'hidden' : ''}`}>{taskList}
-      <li className='item'>
-        <div>
-          <input
-                type="checkbox"
-                name="checkbox"
-              />
-        </div>
+      <ul className={`taskListSection__ul ${noTask ? 'hidden' : ''}`}>
+        {taskList}
+        <li className="item">
+          <div>
+            <input type="checkbox" name="checkbox" />
+          </div>
         </li>
-        </ul>
+      </ul>
       <div className={`taskListSection__buttons ${noTask ? 'hidden' : ''}`}>
-        <button className="taskListSection__buttons__button" onClick={handleCompleteTask} disabled={disabledBtn}>
-          <img src={checkIcon} alt="Check icon" className="taskListSection__buttons__button__icon" />
-        </button>
-        <button className="taskListSection__buttons__button" onClick={handleDeleteTask} disabled={disabledBtn}>
-        <img src={trashIcon} alt="Trash icon" className="taskListSection__buttons__button__icon" />
+        <button
+          className="taskListSection__buttons__button"
+          onClick={handleCompleteTask}
+          disabled={disabledBtn}
+        >
+          <img
+            src={checkIcon}
+            alt="Check icon"
+            className="taskListSection__buttons__button__icon"
+          />
         </button>
         <button
           className="taskListSection__buttons__button"
-          onClick={handleEditTask} 
+          onClick={handleDeleteTask}
+          disabled={disabledBtn}
+        >
+          <img
+            src={trashIcon}
+            alt="Trash icon"
+            className="taskListSection__buttons__button__icon"
+          />
+        </button>
+        <button
+          className="taskListSection__buttons__button"
+          onClick={handleEditTask}
           disabled={disabledEditBtn ? false : true}
         >
-          <img src={editIcon} alt="Edit icon" className="taskListSection__buttons__button__icon" />
+          <img
+            src={editIcon}
+            alt="Edit icon"
+            className="taskListSection__buttons__button__icon"
+          />
         </button>
       </div>
     </section>
