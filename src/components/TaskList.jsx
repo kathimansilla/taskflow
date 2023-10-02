@@ -22,6 +22,7 @@ const TaskList = ({
   const [idSelectedTask, setIdSelectedTask] = useState();
   const [disabledBtn, setDisabledBtn] = useState(true);
 
+  console.log(disabledBtn);
   //variables
   const navigate = useNavigate();
   let emptyMsgClass =
@@ -31,7 +32,7 @@ const TaskList = ({
 
   //useEffect
   useEffect(() => {
-      setDisabledBtn(idSelectedTask ? false : true);
+      setDisabledBtn(idSelectedTask === undefined ? true : false);
     }, [idSelectedTask]);
 
   //functions
@@ -40,8 +41,14 @@ const TaskList = ({
     const idClickedTask = parseInt(ev.currentTarget.id);
     console.log(idClickedTask);
     toggleCheckedTask(idClickedTask);
-    setIdSelectedTask(idClickedTask);
+    const elementClicked = getElementArray(idClickedTask);
+    if (elementClicked.isChecked) {
+      setIdSelectedTask(idClickedTask);
     console.log(idSelectedTask)
+    } else {
+      setIdSelectedTask();
+    console.log(idSelectedTask)
+    }
   };
 
   const handleCheckedTask = (ev) => {
