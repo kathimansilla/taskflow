@@ -8,8 +8,11 @@ import Footer from './Footer';
 import '../styles/App.css';
 import { Route, Routes, Link } from 'react-router-dom';
 import logo from '../assets/images/logo-taskflow.svg';
-import plusIcon from '../assets/images/plus-solid.svg';
+import plusIcon from '../assets/images/square-plus-regular.svg';
 import listIcon from '../assets/images/list-solid.svg';
+import checkIcon from '../assets/images/square-check-regular.svg';
+import trashIcon from '../assets/images/trash-solid.svg';
+import editIcon from '../assets/images/edit-square-solid.svg';
 import ls from '../services/ls';
 
 function App() {
@@ -19,6 +22,7 @@ function App() {
   const [newTask, setNewTask] = useState({ taskName: '' });
   const [emptyInputClass, setEmptyInputClass] = useState('');
   const [taskToEdit, setTaskToEdit] = useState({ taskName: '', edit: false });
+  const [noTask, setNoTask] = useState(true);
 
   //generals functions
   const getElementArray = (taskId) => {
@@ -150,6 +154,7 @@ function App() {
   //useEffect
   useEffect(() => {
     ls.set('data', tasksObj);
+    setNoTask(tasksObj.length === 0 ? true : false);
   }, [tasksObj]);
 
   useEffect(() => {
@@ -183,7 +188,6 @@ function App() {
             path="/NewTask"
             element={
               <Form
-                Link={Link}
                 newTaskObj={newTaskObj}
                 newTask={newTask}
                 saveTask={saveTask}
@@ -199,7 +203,6 @@ function App() {
             path="/TasksList"
             element={
               <TaskList
-                Link={Link}
                 tasksObj={tasksObj}
                 deleteTask={deleteTask}
                 toggleCompletedTask={toggleCompletedTask}
@@ -207,6 +210,11 @@ function App() {
                 toggleCheckedTask={toggleCheckedTask}
                 getIndexElementArray={getIndexElementArray}
                 getElementArray={getElementArray}
+                checkIcon={checkIcon}
+                trashIcon={trashIcon}
+                editIcon={editIcon}
+                noTask={noTask}
+                resetForm={resetForm}
               />
             }
           />

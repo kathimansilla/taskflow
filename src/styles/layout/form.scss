@@ -1,7 +1,7 @@
 @import '../core/variables.scss';
 
 .formSection {
-  background-color: rgb(210, 210, 210);
+  background-color: #FAF6FB;
   height: 80vh;
   display: flex;
   flex-direction: column;
@@ -17,10 +17,11 @@
     &__title {
       text-align: center;
       font-family: $fontGeneral;
+      color: #042B3A;
     }
     &__input {
       &:hover {
-        box-shadow: 5px 3px 3px black;
+        box-shadow: 5px 3px 3px #042B3A;
       }
       &.emptyInput {
         border: 1.5px solid red;
@@ -39,8 +40,8 @@
         &:hover {
           background-color: white;
           cursor: pointer;
-          border-color: antiquewhite;
-          color: gray;
+          border-color: #7bd5e9;
+          color: #2CC0E0;
         }
         &--cancel {
           &:hover {

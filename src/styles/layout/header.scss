@@ -1,7 +1,7 @@
 @import '../core/variables.scss';
 
 .header {
-  background-color: rgb(210, 210, 210);
+  background-color: #FFFFFF;
   height: 10vh;
   position: sticky;
   top: 0;
@@ -19,7 +19,7 @@
       font-family: $fontGeneral;
       font-weight: 600;
       font-size: 0.8rem;
-      color: black;
+      color: #042B3A;
     }
   }
 }

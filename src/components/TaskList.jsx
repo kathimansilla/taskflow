@@ -3,7 +3,6 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const TaskList = ({
-  Link,
   tasksObj,
   deleteTask,
   toggleCompletedTask,
@@ -11,9 +10,11 @@ const TaskList = ({
   toggleCheckedTask,
   getIndexElementArray,
   getElementArray,
+  checkIcon,
+  trashIcon,
+  editIcon,
+  noTask,
 }) => {
-  /*Hacer una función que busque por id el elemento y el index porque lo repito mucho y quizás también para clonar o no?*/
-
   //state variables
   const [hiddenClass, setHiddenClass] = useState(true);
   const [idTaskToDelete, setIdTaskToDelete] = useState();
@@ -29,7 +30,7 @@ const TaskList = ({
       : 'taskListSection__emptyMsg--hidden';
 
   //functions
-  //sadado noche = handleSelectedTask --> checked
+
   const handleSelectedTask = (ev) => {
     console.log('estoy en handleSelectedTask');
     const idClickedTask = parseInt(ev.currentTarget.id);
@@ -112,26 +113,29 @@ const TaskList = ({
   return (
     <section className="taskListSection">
       <p className={emptyMsgClass}>¡No tienes tareas pendientes!</p>
-      <ul className="taskListSection__ul">{taskList}</ul>
-      <div className="item__buttons">
-      <form>
+      <ul className={`taskListSection__ul ${noTask ? 'hidden' : ''}`}>{taskList}
+      <li className='item'>
+        <div>
           <input
-            type="checkbox"
-            name="checkbox"
-          />
-        </form>
-        <button className="item__buttons__button" onClick={handleCompleteTask}>
-          Finalizado
+                type="checkbox"
+                name="checkbox"
+              />
+        </div>
+        </li>
+        </ul>
+      <div className={`taskListSection__buttons ${noTask ? 'hidden' : ''}`}>
+        <button className="taskListSection__buttons__button" onClick={handleCompleteTask}>
+          <img src={checkIcon} alt="Check icon" className="taskListSection__buttons__button__icon" />
         </button>
-        <button className="item__buttons__button" onClick={handleDeleteTask}>
-          Elimnar
+        <button className="taskListSection__buttons__button" onClick={handleDeleteTask}>
+        <img src={trashIcon} alt="Trash icon" className="taskListSection__buttons__button__icon" />
         </button>
         <button
-          className="item__buttons__button--edit"
+          className="taskListSection__buttons__button"
           onClick={handleEditTask} 
           disabled={disableEditBtn}
         >
-          Editar
+          <img src={editIcon} alt="Edit icon" className="taskListSection__buttons__button__icon" />
         </button>
       </div>
     </section>

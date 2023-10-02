@@ -2,15 +2,17 @@
 
 .taskListSection {
   z-index: -1;
-  background-color: rgb(210, 210, 210);
+  background-color: #FAF6FB;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   height: 80vh;
   gap: 10px;
   &__emptyMsg {
     font-family: $fontGeneral;
+    margin-top: 17%;
+    color: #1A414E;
     &--hidden {
       display: none;
     }
@@ -18,10 +20,12 @@
   &__ul {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
     gap: 10px;
-    margin: 0 15% 2%;
+    margin: 10% 15% 2%;
+    justify-content: flex-start;
+    &.hidden {
+      display: none;
+    }
     & .item {
       display: flex;
       flex-direction: column;
@@ -55,31 +59,29 @@
           }
         }
       }
-      &__buttons {
-       display: none;
-      &__button {
-        background-color: transparent;
-        border: none;
-        margin: 5px 0;
-        font-size: .7rem;
-        &:hover {
-          align-self: end;
-          color: red;
-          cursor: pointer;
-        }
-        &--edit {
-          font-family: $fontGeneral;
-          text-decoration: none;
-          margin-top: 6.9px;
-          font-size: .7rem;
-          color: black;
-          &:hover {
-            color: gray;
-          }
-        }
-      }
     }
+  }
+  &__buttons {
+    display: flex;
+    justify-self: end;
+    gap: 20px;
+    margin-bottom: 5%;
+    &.hidden {
+      display: none;
+    }
+    &__button {
+      background-color: transparent;
+      border: none;
+      margin: 5px 0;
+      font-size: 0.7rem;
+      &__icon {
+        width: 20px;
+      }
+      &:hover {
+        align-self: end;
+        color: red;
+        cursor: pointer;
+      }
     }
   }
 }
-

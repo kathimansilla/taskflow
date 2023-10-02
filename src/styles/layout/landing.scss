@@ -1,7 +1,7 @@
 @import '../core/variables.scss';
 
 .landing {
-  background-color: rgb(210, 210, 210);
+  background-color: #1A414E;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -11,6 +11,7 @@
   &__title {
     font-family: $fontGeneral;
     font-weight: 600;
+    color: white;
   }
   &__logo {
     width: 60px;

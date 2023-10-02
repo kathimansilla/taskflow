@@ -1,13 +1,9 @@
-const Form = ({ Link, newTaskObj, newTask, saveTask, emptyInputClass, taskToEdit, editTask, resetForm, getIndexElementArray }) => {
+const Form = ({ newTaskObj, newTask, saveTask, emptyInputClass, taskToEdit, editTask, resetForm, getIndexElementArray }) => {
   //functions
   const handleCancel = (ev) => {
     ev.preventDefault();
     const indexTaskToEdit = getIndexElementArray(taskToEdit.idTask);;
     resetForm(indexTaskToEdit);
-  };
-
-  const handleLink = (ev) => {
-    resetForm();
   };
 
   const handleSubmit = (ev) => {
