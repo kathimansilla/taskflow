@@ -14,6 +14,8 @@ const TaskList = ({
   trashIcon,
   editIcon,
   noTask,
+  allChecked,
+  allCheckedFunction,
 }) => {
   //state variables
   const [hiddenClass, setHiddenClass] = useState(true);
@@ -37,6 +39,12 @@ const TaskList = ({
   }, [idSelectedTask]);
 
   //functions
+  const handleAllChecked = () => {
+    const arrayIdTask = tasksObj.map((task) => task.idTask);
+    setIdSelectedTask(arrayIdTask);
+    allCheckedFunction(arrayIdTask);
+  };
+
   const handleSelectedTask = (ev) => {
     const idClickedTask = parseInt(ev.currentTarget.id);
     toggleCheckedTask(idClickedTask);
@@ -140,7 +148,9 @@ const TaskList = ({
         {taskList}
         <li className="item">
           <div>
-            <input type="checkbox" name="checkbox" />
+            <input type="checkbox" name="checkbox"
+            checked={allChecked}
+            onClick={handleAllChecked}/>
           </div>
         </li>
       </ul>

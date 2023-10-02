@@ -24,6 +24,9 @@ function App() {
   const [taskToEdit, setTaskToEdit] = useState({ taskName: '', edit: false });
   const [noTask, setNoTask] = useState(true);
   const [indexTaskToEdit, setIndexTaskToEdit] = useState();
+  const [allChecked, setAllChecked] = useState(false);
+
+  console.log(allChecked);
 
   //generals functions
   const getElementArray = (taskId) => {
@@ -35,10 +38,21 @@ function App() {
   };
 
   //specific functions
+  const allCheckedFunction = (arraIdTask) => {
+    tasksObj.map((task) => task.isChecked = !task.isChecked);
+    setAllChecked(!allChecked);
+    if (allChecked) {
+      tasksObj.map((task) => task.isChecked = false);
+    } else {
+      tasksObj.map((task) => task.isChecked = true);
+    }
+  };
+
   const resetForm = () => {
     setTaskToEdit({ taskName: '', edit: false });
     setNewTask({ taskName: '' });
     setEmptyInputClass('');
+    setAllChecked(false);
       const updateTaskObj = [...tasksObj];
       updateTaskObj[indexTaskToEdit].edit = false;
       updateTaskObj[indexTaskToEdit].isChecked = false;
@@ -205,6 +219,8 @@ function App() {
                 editIcon={editIcon}
                 noTask={noTask}
                 resetForm={resetForm}
+                allChecked={allChecked}
+                allCheckedFunction={allCheckedFunction}
               />
             }
           />
