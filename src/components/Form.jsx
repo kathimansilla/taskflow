@@ -3,7 +3,7 @@ const Form = ({ newTaskObj, newTask, saveTask, emptyInputClass, taskToEdit, edit
   const handleCancel = (ev) => {
     ev.preventDefault();
     const indexTaskToEdit = getIndexElementArray(taskToEdit.idTask);;
-    resetForm(indexTaskToEdit);
+    resetForm();
   };
 
   const handleSubmit = (ev) => {
@@ -23,7 +23,7 @@ const Form = ({ newTaskObj, newTask, saveTask, emptyInputClass, taskToEdit, edit
     <>
       <section className='formSection'>
         <form className="form">
-          <h2 className="form__title">Añadir tarea</h2>
+          <h2 className="form__title">añadir tarea</h2>
           <input
             className={`form__input ${emptyInputClass}`}
             type="text"

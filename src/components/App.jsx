@@ -23,6 +23,7 @@ function App() {
   const [emptyInputClass, setEmptyInputClass] = useState('');
   const [taskToEdit, setTaskToEdit] = useState({ taskName: '', edit: false });
   const [noTask, setNoTask] = useState(true);
+  const [indexTaskToEdit, setIndexTaskToEdit] = useState();
 
   //generals functions
   const getElementArray = (taskId) => {
@@ -34,43 +35,35 @@ function App() {
   };
 
   //specific functions
-  const resetForm = (indexTaskToEdit) => {
+  const resetForm = () => {
     setTaskToEdit({ taskName: '', edit: false });
     setNewTask({ taskName: '' });
     setEmptyInputClass('');
-
-    const updateTaskObj = [...tasksObj];
-      updateTaskObj[indexTaskToEdit].edit =
-        !updateTaskObj[indexTaskToEdit].edit;
-        updateTaskObj[indexTaskToEdit].isChecked =
-        !updateTaskObj[indexTaskToEdit].isChecked;
-        setTasksObj(updateTaskObj);
-        console.log(updateTaskObj);
+      const updateTaskObj = [...tasksObj];
+      updateTaskObj[indexTaskToEdit].edit = false;
+      updateTaskObj[indexTaskToEdit].isChecked = false;
+      setTasksObj(updateTaskObj);
   };
 
   const editTask = (keyName, value) => {
-      const editData = {
-            ...taskToEdit,
-            [keyName]: value,
-          };
-          setTaskToEdit(editData);
+    const editData = {
+      ...taskToEdit,
+      [keyName]: value,
     };
-  
-
+    setTaskToEdit(editData);
+  };
 
   const getTaskToEdit = (taskId) => {
     const taskToEditLocal = getElementArray(taskId);
     const IndexTaskToEditLocal = getIndexElementArray(taskId);
-    console.log(taskToEditLocal); 
+    setIndexTaskToEdit(IndexTaskToEditLocal);
     const taskEditTrue = { ...taskToEditLocal, edit: true, isChecked: false };
-    console.log(taskEditTrue);
     setTaskToEdit(taskEditTrue);
 
     const updateTaskObj = [...tasksObj];
-      updateTaskObj[IndexTaskToEditLocal].edit =
-        !updateTaskObj[IndexTaskToEditLocal].edit;
-        setTasksObj(updateTaskObj);
-        console.log(updateTaskObj);
+    updateTaskObj[IndexTaskToEditLocal].edit = false;
+    updateTaskObj[IndexTaskToEditLocal].isChecked = false;
+    setTasksObj(updateTaskObj);
   };
 
   const newTaskObj = (keyName, value) => {
@@ -91,34 +84,29 @@ function App() {
       (newTask.taskName.trim() === '' || newTask.taskName === undefined) &&
       !taskToEdit.edit
     ) {
-      console.log('estoy en if');
       setEmptyInputClass('emptyInput');
     } else if (taskToEdit.edit) {
-      console.log('estoy en if edit');
       if (taskToEdit.taskName === '') {
-        console.log('estoy en if edit if empty');
         setEmptyInputClass('emptyInput');
       } else {
-        console.log('estoy en if edit else');
         const taskToEditClone = { ...taskToEdit, edit: false };
         const taskObjClone = [...tasksObj];
         const indexTaskToEdit = getIndexElementArray(taskToEdit.idTask);
         taskObjClone.splice(indexTaskToEdit, 1, taskToEditClone);
         setTasksObj(taskObjClone);
         setEmptyInputClass('');
-        setTaskToEdit({ taskName: ''});
+        setTaskToEdit({ taskName: '' });
         setNewTask({ taskName: '' });
         //save in DDBB
       }
     } else {
-      console.log('estoy en else');
       setIdTask(idTask + 1);
       const newTaskWhitId = { ...newTask, idTask: idTask };
       const newTaskToArray = [...tasksObj, newTaskWhitId];
       setTasksObj(newTaskToArray);
       setEmptyInputClass('');
       setNewTask({ taskName: '' });
-      setTaskToEdit({ taskName: ''});
+      setTaskToEdit({ taskName: '' });
       //save in DDBB
     }
   };
@@ -132,22 +120,18 @@ function App() {
       const updateTaskObj = [...tasksObj];
       updateTaskObj[completedTaskIndex].isCompleted =
         !updateTaskObj[completedTaskIndex].isCompleted;
-        updateTaskObj[completedTaskIndex].isChecked = false;
+      updateTaskObj[completedTaskIndex].isChecked = false;
       setTasksObj(updateTaskObj);
     }
   };
 
   //con esta función se modifica la propiedad checked del objeto task
   const toggleCheckedTask = (idTask) => {
-    console.log('toggleCheckedTask');
     const checkedTaskIndex = getIndexElementArray(idTask);
-    const taskObjClone = [ ...tasksObj  ];
-    console.log(taskObjClone);
-    taskObjClone[checkedTaskIndex].isChecked = !taskObjClone[checkedTaskIndex].isChecked;
+    const taskObjClone = [...tasksObj];
+    taskObjClone[checkedTaskIndex].isChecked =
+      !taskObjClone[checkedTaskIndex].isChecked;
     setTasksObj(taskObjClone);
-    console.log(taskObjClone);
-    console.log(checkedTaskIndex);
-    console.log(tasksObj);
   };
 
   //useEffect
@@ -167,11 +151,8 @@ function App() {
     }
   }, []);
 
-  
-
   //Eliminar tarea
   const deleteTask = (taskId) => {
-    console.log(taskId);
     const cleanTaskObj = tasksObj.filter((task) => task.idTask !== taskId);
     setTasksObj(cleanTaskObj);
     ls.remove(taskId);
@@ -219,9 +200,15 @@ function App() {
           />
         </Routes>
       </main>
-      <Footer logo={logo} plusIcon={plusIcon} Link={Link} resetForm={resetForm} listIcon={listIcon} />
+      <Footer
+        logo={logo}
+        plusIcon={plusIcon}
+        Link={Link}
+        resetForm={resetForm}
+        listIcon={listIcon}
+      />
     </>
   );
-};
+}
 
 export default App;

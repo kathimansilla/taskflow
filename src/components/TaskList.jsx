@@ -19,10 +19,13 @@ const TaskList = ({
   const [hiddenClass, setHiddenClass] = useState(true);
   const [idTaskToDelete, setIdTaskToDelete] = useState();
   const [taskNameToDelete, setTaskNameToDelete] = useState('');
-  const [idSelectedTask, setIdSelectedTask] = useState();
+  const [idSelectedTask, setIdSelectedTask] = useState([]);
   const [disabledBtn, setDisabledBtn] = useState(true);
+  const [disabledEditBtn, setDisabledEditBtn] = useState(true);
 
-  console.log(disabledBtn);
+  console.log(disabledEditBtn);
+  console.log(idSelectedTask.length);
+  console.log(idSelectedTask);
   //variables
   const navigate = useNavigate();
   let emptyMsgClass =
@@ -32,52 +35,48 @@ const TaskList = ({
 
   //useEffect
   useEffect(() => {
-      setDisabledBtn(idSelectedTask === undefined ? true : false);
+      setDisabledBtn(idSelectedTask.length === 0 ? true : false);
+      setDisabledEditBtn(idSelectedTask.length === 1 ? true : false);
     }, [idSelectedTask]);
 
   //functions
   const handleSelectedTask = (ev) => {
-    console.log('estoy en handleSelectedTask');
     const idClickedTask = parseInt(ev.currentTarget.id);
-    console.log(idClickedTask);
     toggleCheckedTask(idClickedTask);
     const elementClicked = getElementArray(idClickedTask);
     if (elementClicked.isChecked) {
-      setIdSelectedTask(idClickedTask);
-    console.log(idSelectedTask)
+      const idSelectedTaskClone = [...idSelectedTask];
+      idSelectedTaskClone.push(idClickedTask);
+      setIdSelectedTask(idSelectedTaskClone);
     } else {
-      setIdSelectedTask();
-    console.log(idSelectedTask)
+      setIdSelectedTask([]);
     }
   };
 
   const handleCheckedTask = (ev) => {
     const idClickedTask = parseInt(ev.target.id);
-    if (idSelectedTask === undefined) {
-      setIdSelectedTask(idClickedTask);
+    if (idSelectedTask.length === 0) {
+      setIdSelectedTask([idClickedTask]);
     } else {
       //setDisabledEditBtn(true);
       //setIdSelectedTask([...idSelectedTask, idClickedTask]);
     };
-    console.log(idSelectedTask)
   };
 
-  const handleEditTask = (ev) => {
-    const indexTaskToEdit = getIndexElementArray(idSelectedTask);
-    console.log(indexTaskToEdit);
-    getTaskToEdit(indexTaskToEdit);
+  const handleEditTask = () => {
+    getTaskToEdit(idSelectedTask[0]);
     navigate("/NewTask");
   };
 
   const handleDeleteTask = (ev) => {
     ev.preventDefault();
     //Busco la tarea a eliminar para pasar su nombre a <Modal />
-    const clickedTask = getElementArray(idSelectedTask);
+    const clickedTask = getElementArray(idSelectedTask[0]);
     setTaskNameToDelete(clickedTask.taskName);
     switchHiddenClass();
     //quizas no sea necesaria la state var idTaskToDelete
-    setIdTaskToDelete(idSelectedTask);
-    setIdSelectedTask();
+    setIdTaskToDelete(idSelectedTask[0]);
+    setIdSelectedTask([]);
   };
 
   const switchHiddenClass = () => {
@@ -86,8 +85,8 @@ const TaskList = ({
 
   const handleCompleteTask = (ev) => {
     ev.preventDefault();
-    toggleCompletedTask(idSelectedTask);
-    setIdSelectedTask();
+    toggleCompletedTask(idSelectedTask[0]);
+    setIdSelectedTask([]);
   };
 
   const taskList = tasksObj.map((task) => (
@@ -149,7 +148,7 @@ const TaskList = ({
         <button
           className="taskListSection__buttons__button"
           onClick={handleEditTask} 
-          disabled={disabledBtn}
+          disabled={disabledEditBtn ? false : true}
         >
           <img src={editIcon} alt="Edit icon" className="taskListSection__buttons__button__icon" />
         </button>
