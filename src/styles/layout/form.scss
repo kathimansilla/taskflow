@@ -27,35 +27,29 @@
         box-shadow: 1px 1px 1px red;
       }
     }
-    &__button {
-      border-radius: 20%;
-      background-color: transparent;
-      font-size: 0.8rem;
-      font-family: $fontGeneral;
-      &:hover {
-        background-color: white;
-        cursor: pointer;
-        border-color: antiquewhite;
-        color: gray;
-      }
-      &--cancel {
+    &__btnContainer {
+      display: flex;
+      gap: 10px;
+      margin-top: 20px;
+      &__button {
+        border-radius: 20%;
+        background-color: transparent;
+        font-size: 0.8rem;
+        font-family: $fontGeneral;
         &:hover {
           background-color: white;
           cursor: pointer;
-          border-color: red;
-          color: red;
+          border-color: antiquewhite;
+          color: gray;
         }
-      }
-    }
-    &__link {
-      text-decoration: none;
-      color: black;
-      font-size: 0.8rem;
-      transition: font-size 1s ease;
-      font-family: $fontGeneral;
-      &:hover {
-        color: gray;
-        font-size: 0.9rem;
+        &--cancel {
+          &:hover {
+            background-color: white;
+            cursor: pointer;
+            border-color: red;
+            color: red;
+          }
+        }
       }
     }
   }

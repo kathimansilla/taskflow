@@ -15,19 +15,6 @@
   &__logo {
     width: 60px;
   } 
-  &__link {
-    font-family: $fontGeneral;
-    font-size: .8rem;
-    margin-top: 20px;
-    text-decoration: none;
-    color: black;
-    &:hover {
-      color: rgb(140, 140, 140);
-    }
-    &--2 {
-      margin-top: 0px;
-    }
-  }
   &__message {
     margin-top: 50px;
     color: gray;

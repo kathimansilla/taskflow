@@ -1,11 +1,30 @@
+@import '../core/variables.scss';
 .footer {
-    background-color: rgb(97, 253, 253);
-    height: 10vh;
-    position: sticky;
-    bottom: 0;
-    display: flex;
-    padding: 0 15px;
-    &__logo {
-        width: 40px;
+  background-color: rgb(97, 253, 253);
+  height: 10vh;
+  position: sticky;
+  bottom: 0;
+  display: flex;
+  gap: 30px;
+  padding: 0 15px;
+  justify-content: center;
+  align-items: center;
+  &__link {
+    text-decoration: none;
+    color: black;
+    font-size: 0.8rem;
+    font-family: $fontGeneral;
+    &__iconPlus {
+      width: 20px;
+      &:hover {
+        color: gray;
+      }
     }
+    &__logo {
+      width: 30px;
+      &:hover {
+        color: gray;
+      }
+    }
+  }
 }

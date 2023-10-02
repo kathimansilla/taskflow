@@ -1,12 +1,23 @@
-
 // eslint-disable-next-line react/prop-types
-const Footer = ( {logo} ) => {
+const Footer = ({ logo, Link, resetForm, plusIcon, listIcon }) => {
 
-    return (
-        <footer className='footer'>
-            <img className='footer__logo' src={logo} alt="Logo TaskFlow" />
-        </footer>
-    );
+    const handleLink = (ev) => {
+        resetForm();
+      };
+  
+      return (
+    <footer className="footer">
+      <Link to="/NewTask" className="footer__link">
+      <img className="footer__link__iconPlus" src={plusIcon} alt="Plus icon" />
+      </Link>
+      <Link to="/TasksList" className="footer__link">
+      <img className="footer__link__iconPlus" src={listIcon} alt="List icon" />
+      </Link>
+      <Link to="/" onClick={handleLink} className="footer__link">
+        <img className="footer__link__logo" src={logo} alt="Logo TaskFlow" />
+      </Link>
+    </footer>
+  );
 };
 
 export default Footer;

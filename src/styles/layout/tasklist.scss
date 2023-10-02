@@ -81,16 +81,5 @@
     }
     }
   }
-  &__link {
-    font-family: $fontGeneral;
-    text-decoration: none;
-    color: black;
-    font-size: 0.8rem;
-    transition: font-size 1s ease;
-    &:hover {
-      color: gray;
-      font-size: .9rem;
-    }
-  }
 }
 

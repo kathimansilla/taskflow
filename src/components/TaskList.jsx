@@ -134,12 +134,6 @@ const TaskList = ({
           Editar
         </button>
       </div>
-      <Link to="/NewTask" className="taskListSection__link">
-        añadir tarea
-      </Link>
-      <Link className="taskListSection__link" to="/">
-        inicio
-      </Link>
     </section>
   );
 };

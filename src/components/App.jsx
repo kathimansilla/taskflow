@@ -8,6 +8,8 @@ import Footer from './Footer';
 import '../styles/App.css';
 import { Route, Routes, Link } from 'react-router-dom';
 import logo from '../assets/images/logo-taskflow.svg';
+import plusIcon from '../assets/images/plus-solid.svg';
+import listIcon from '../assets/images/list-solid.svg';
 import ls from '../services/ls';
 
 function App() {
@@ -173,7 +175,7 @@ function App() {
 
   return (
     <>
-      <Header logo={logo} />
+      <Header logo={logo} resetForm={resetForm} Link={Link} />
       <main>
         <Routes>
           <Route path="/" element={<Landing Link={Link} logo={logo} />} />
@@ -210,7 +212,7 @@ function App() {
           />
         </Routes>
       </main>
-      <Footer logo={logo} />
+      <Footer logo={logo} plusIcon={plusIcon} Link={Link} resetForm={resetForm} listIcon={listIcon} />
     </>
   );
 };

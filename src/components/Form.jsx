@@ -37,11 +37,11 @@ const Form = ({ Link, newTaskObj, newTask, saveTask, emptyInputClass, taskToEdit
             value={newTask.taskName || taskToEdit.taskName || ''}
             onInput={handleInput}
           />
-          <input type="submit" onClick={handleSubmit} value="Guardar" className="form__button" />
-          <input type="submit" onClick={handleCancel} value="Cancelar" className="form__button form__button--cancel" />
+          <div className="form__btnContainer">
+            <input type="submit" onClick={handleSubmit} value="Guardar" className="form__btnContainer__button" />
+            <input type="submit" onClick={handleCancel} value="Cancelar" className="form__btnContainer__button form__btnContainer__button--cancel" />
+          </div>
         </form>
-        <Link to="/TasksList" onClick={handleLink} className='form__link'>lista de tareas</Link>
-        <Link to="/" onClick={handleLink} className='form__link'>inicio</Link>
       </section>
     </>
   );
