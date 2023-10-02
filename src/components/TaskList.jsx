@@ -143,7 +143,7 @@ const TaskList = ({
         <button className="taskListSection__buttons__button" onClick={handleCompleteTask} disabled={disabledBtn}>
           <img src={checkIcon} alt="Check icon" className="taskListSection__buttons__button__icon" />
         </button>
-        <button className="taskListSection__buttons__button" onClick={handleDeleteTask}>
+        <button className="taskListSection__buttons__button" onClick={handleDeleteTask} disabled={disabledBtn}>
         <img src={trashIcon} alt="Trash icon" className="taskListSection__buttons__button__icon" />
         </button>
         <button
