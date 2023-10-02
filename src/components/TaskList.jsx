@@ -49,6 +49,7 @@ const TaskList = ({
     const idClickedTask = parseInt(ev.currentTarget.id);
     toggleCheckedTask(idClickedTask);
     const elementClicked = getElementArray(idClickedTask);
+
     if (elementClicked.isChecked) {
       const idSelectedTaskClone = [...idSelectedTask];
       idSelectedTaskClone.push(idClickedTask);

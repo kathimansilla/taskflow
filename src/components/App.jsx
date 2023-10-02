@@ -27,6 +27,7 @@ function App() {
   const [allChecked, setAllChecked] = useState(false);
 
   console.log(allChecked);
+  console.log(tasksObj);
 
   //generals functions
   const getElementArray = (taskId) => {
@@ -39,7 +40,6 @@ function App() {
 
   //specific functions
   const allCheckedFunction = (arraIdTask) => {
-    tasksObj.map((task) => task.isChecked = !task.isChecked);
     setAllChecked(!allChecked);
     if (allChecked) {
       tasksObj.map((task) => task.isChecked = false);
@@ -128,7 +128,6 @@ function App() {
   //con esta función se marca la tarea como completada
   const toggleCompletedTask = (arrayIdTask) => {
     console.log(arrayIdTask);
-    //const completedTaskIndex = getIndexElementArray(idTask);
     if (!arrayIdTask) {
       console.log('error: no se encontró la tarea');
     } else {
@@ -149,6 +148,7 @@ function App() {
 
   //con esta función se modifica la propiedad checked del objeto task
   const toggleCheckedTask = (idTask) => {
+    setAllChecked(false);
     const checkedTaskIndex = getIndexElementArray(idTask);
     const taskObjClone = [...tasksObj];
     taskObjClone[checkedTaskIndex].isChecked =
