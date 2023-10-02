@@ -132,8 +132,7 @@ function App() {
       const updateTaskObj = [...tasksObj];
       updateTaskObj[completedTaskIndex].isCompleted =
         !updateTaskObj[completedTaskIndex].isCompleted;
-        updateTaskObj[completedTaskIndex].isChecked =
-        !updateTaskObj[completedTaskIndex].isChecked;
+        updateTaskObj[completedTaskIndex].isChecked = false;
       setTasksObj(updateTaskObj);
     }
   };

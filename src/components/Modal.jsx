@@ -1,4 +1,4 @@
-const Modal = ({ hiddenClass, deleteTask, idTaskToDelete, switchHiddenClass, taskNameToDelete }) => {
+const Modal = ({ hiddenClass, deleteTask, idTaskToDelete, switchHiddenClass, taskNameToDelete, toggleCheckedTask }) => {
 
     //functions
     const handleConfirmDelete = () => {
@@ -7,6 +7,7 @@ const Modal = ({ hiddenClass, deleteTask, idTaskToDelete, switchHiddenClass, tas
     };
     const handleCancelDelete = () => {
         switchHiddenClass();
+        toggleCheckedTask(idTaskToDelete);
     };
 
   return (

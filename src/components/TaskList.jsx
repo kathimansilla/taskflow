@@ -1,5 +1,5 @@
 import Modal from './Modal';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const TaskList = ({
@@ -20,7 +20,7 @@ const TaskList = ({
   const [idTaskToDelete, setIdTaskToDelete] = useState();
   const [taskNameToDelete, setTaskNameToDelete] = useState('');
   const [idSelectedTask, setIdSelectedTask] = useState();
-  const [disableEditBtn, setDisabledEditBtn] = useState(false);
+  const [disabledBtn, setDisabledBtn] = useState(true);
 
   //variables
   const navigate = useNavigate();
@@ -29,14 +29,19 @@ const TaskList = ({
       ? 'taskListSection__emptyMsg'
       : 'taskListSection__emptyMsg--hidden';
 
-  //functions
+  //useEffect
+  useEffect(() => {
+      setDisabledBtn(idSelectedTask ? false : true);
+    }, [idSelectedTask]);
 
+  //functions
   const handleSelectedTask = (ev) => {
     console.log('estoy en handleSelectedTask');
     const idClickedTask = parseInt(ev.currentTarget.id);
     console.log(idClickedTask);
     toggleCheckedTask(idClickedTask);
     setIdSelectedTask(idClickedTask);
+    console.log(idSelectedTask)
   };
 
   const handleCheckedTask = (ev) => {
@@ -47,6 +52,7 @@ const TaskList = ({
       //setDisabledEditBtn(true);
       //setIdSelectedTask([...idSelectedTask, idClickedTask]);
     };
+    console.log(idSelectedTask)
   };
 
   const handleEditTask = (ev) => {
@@ -64,6 +70,7 @@ const TaskList = ({
     switchHiddenClass();
     //quizas no sea necesaria la state var idTaskToDelete
     setIdTaskToDelete(idSelectedTask);
+    setIdSelectedTask();
   };
 
   const switchHiddenClass = () => {
@@ -73,6 +80,7 @@ const TaskList = ({
   const handleCompleteTask = (ev) => {
     ev.preventDefault();
     toggleCompletedTask(idSelectedTask);
+    setIdSelectedTask();
   };
 
   const taskList = tasksObj.map((task) => (
@@ -106,6 +114,7 @@ const TaskList = ({
         idTaskToDelete={idTaskToDelete}
         switchHiddenClass={switchHiddenClass}
         taskNameToDelete={taskNameToDelete}
+        toggleCheckedTask={toggleCheckedTask}
       />
     </li>
   ));
@@ -124,7 +133,7 @@ const TaskList = ({
         </li>
         </ul>
       <div className={`taskListSection__buttons ${noTask ? 'hidden' : ''}`}>
-        <button className="taskListSection__buttons__button" onClick={handleCompleteTask}>
+        <button className="taskListSection__buttons__button" onClick={handleCompleteTask} disabled={disabledBtn}>
           <img src={checkIcon} alt="Check icon" className="taskListSection__buttons__button__icon" />
         </button>
         <button className="taskListSection__buttons__button" onClick={handleDeleteTask}>
@@ -133,7 +142,7 @@ const TaskList = ({
         <button
           className="taskListSection__buttons__button"
           onClick={handleEditTask} 
-          disabled={disableEditBtn}
+          disabled={disabledBtn}
         >
           <img src={editIcon} alt="Edit icon" className="taskListSection__buttons__button__icon" />
         </button>
