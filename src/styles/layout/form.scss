@@ -14,12 +14,19 @@
     justify-content: center;
     align-items: center;
     gap: 20px;
+    &__SuccessMsg {
+      color: #1c4150;
+    }
     &__title {
       text-align: center;
       font-family: $fontGeneral;
       color: #042B3A;
     }
     &__input {
+      width: 130%;
+      height: 25px;
+      border-radius: 10%;
+      font-size: 1rem;
       &:hover {
         box-shadow: 5px 3px 3px #042B3A;
       }

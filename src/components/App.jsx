@@ -25,6 +25,7 @@ function App() {
   const [noTask, setNoTask] = useState(true);
   const [indexTaskToEdit, setIndexTaskToEdit] = useState();
   const [allChecked, setAllChecked] = useState(false);
+  const [successMsg, setSuccessMsg] = useState('');
 
   //generals functions
   const getElementArray = (taskId) => {
@@ -118,6 +119,10 @@ function App() {
         setEmptyInputClass('');
         setTaskToEdit({ taskName: '' });
         setNewTask({ taskName: '' });
+        setSuccessMsg('¡Editado con éxito!');
+        setTimeout(() => {
+          setSuccessMsg('');
+        }, 1000);
         //save in DDBB
       }
     } else {
@@ -128,6 +133,10 @@ function App() {
       setEmptyInputClass('');
       setNewTask({ taskName: '' });
       setTaskToEdit({ taskName: '' });
+      setSuccessMsg('¡Guardado con éxito!');
+        setTimeout(() => {
+          setSuccessMsg('');
+        }, 1000);
       //save in DDBB
     }
   };
@@ -206,6 +215,7 @@ function App() {
                 editTask={editTask}
                 resetForm={resetForm}
                 getIndexElementArray={getIndexElementArray}
+                successMsg={successMsg}
               />
             }
           />

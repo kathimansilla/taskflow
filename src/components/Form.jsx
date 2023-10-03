@@ -1,4 +1,4 @@
-const Form = ({ newTaskObj, newTask, saveTask, emptyInputClass, taskToEdit, editTask, resetForm, getIndexElementArray }) => {
+const Form = ({ newTaskObj, newTask, saveTask, emptyInputClass, taskToEdit, editTask, resetForm, getIndexElementArray, successMsg }) => {
   //functions
   const handleCancel = (ev) => {
     ev.preventDefault();
@@ -23,6 +23,7 @@ const Form = ({ newTaskObj, newTask, saveTask, emptyInputClass, taskToEdit, edit
     <>
       <section className='formSection'>
         <form className="form">
+          <p className='form__SuccessMsg'>{successMsg}</p>
           <h2 className="form__title">añadir tarea</h2>
           <input
             className={`form__input ${emptyInputClass}`}
