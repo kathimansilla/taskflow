@@ -1,5 +1,6 @@
 import Modal from '../common/Modal';
 import TaskItem from './TaskItem';
+import Button from '../common/Button';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -67,7 +68,7 @@ const TaskList = ({
     }
   };
 
-  /*para que la propiedad checked sea controlable, el input necesita escuchar un evento*/
+  /*For the checked property to be controllable, the input needs to listen to an event*/
   const handleCheckedTask = (ev) => {
     const idClickedTask = parseInt(ev.target.id);
     if (idSelectedTask.length === 0) {
@@ -150,39 +151,9 @@ const TaskList = ({
         </li>
       </ul>
       <div className={`taskListSection__buttons ${noTask ? 'hidden' : ''}`}>
-        <button
-          className="taskListSection__buttons__button"
-          onClick={handleCompleteTask}
-          disabled={disabledBtn}
-        >
-          <img
-            src={checkIcon}
-            alt="Check icon"
-            className="taskListSection__buttons__button__icon"
-          />
-        </button>
-        <button
-          className="taskListSection__buttons__button"
-          onClick={handleDeleteTask}
-          disabled={disabledBtn}
-        >
-          <img
-            src={trashIcon}
-            alt="Trash icon"
-            className="taskListSection__buttons__button__icon"
-          />
-        </button>
-        <button
-          className="taskListSection__buttons__button"
-          onClick={handleEditTask}
-          disabled={disabledEditBtn ? false : true}
-        >
-          <img
-            src={editIcon}
-            alt="Edit icon"
-            className="taskListSection__buttons__button__icon"
-          />
-        </button>
+        <Button onClick={handleCompleteTask} disabled={disabledBtn} src={checkIcon} alt="Check icon" />
+        <Button onClick={handleDeleteTask} disabled={disabledBtn} src={trashIcon} alt="Trash icon" />
+        <Button onClick={handleEditTask} disabled={disabledEditBtn ? false : true} src={editIcon} alt="Edit icon" />
       </div>
     </section>
   );

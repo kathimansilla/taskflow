@@ -1,11 +1,14 @@
 import { useState, useEffect } from 'react';
+import { Route, Routes, Link } from 'react-router-dom';
 import '../styles/App.scss';
+//components and services
 import Header from './layout/Header';
 import Landing from './layout/Landing';
 import Form from './layout/Form';
 import TaskList from './task/TaskList';
 import Footer from './layout/Footer';
-import { Route, Routes, Link } from 'react-router-dom';
+import ls from '../services/ls';
+//images
 import logoBlack from '../assets/images/logo-taskflow.svg';
 import logoWhite from '../assets/images/logo-taskflowWhite.svg';
 import plusIcon from '../assets/images/square-plus-regular.svg';
@@ -13,7 +16,6 @@ import listIcon from '../assets/images/list-solid.svg';
 import checkIcon from '../assets/images/square-check-regular.svg';
 import trashIcon from '../assets/images/trash-solid.svg';
 import editIcon from '../assets/images/edit-square-solid.svg';
-import ls from '../services/ls';
 
 function App() {
   // state variables
