@@ -7,7 +7,8 @@ import TaskList from './TaskList';
 import Footer from './Footer';
 import '../styles/App.css';
 import { Route, Routes, Link } from 'react-router-dom';
-import logo from '../assets/images/logo-taskflow.svg';
+import logoBlack from '../assets/images/logo-taskflow.svg';
+import logoWhite from '../assets/images/logo-taskflowWhite.svg';
 import plusIcon from '../assets/images/square-plus-regular.svg';
 import listIcon from '../assets/images/list-solid.svg';
 import checkIcon from '../assets/images/square-check-regular.svg';
@@ -199,10 +200,10 @@ function App() {
 
   return (
     <>
-      <Header logo={logo} resetForm={resetForm} Link={Link} />
+      <Header logoBlack={logoBlack} resetForm={resetForm} Link={Link} />
       <main>
         <Routes>
-          <Route path="/" element={<Landing Link={Link} logo={logo} />} />
+          <Route path="/" element={<Landing Link={Link} logoWhite={logoWhite} />} />
           <Route
             path="/NewTask"
             element={
@@ -245,7 +246,7 @@ function App() {
         </Routes>
       </main>
       <Footer
-        logo={logo}
+        logoBlack={logoBlack}
         plusIcon={plusIcon}
         Link={Link}
         resetForm={resetForm}
