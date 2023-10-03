@@ -38,12 +38,15 @@ function App() {
   };
 
   //specific functions
-  const allCheckedFunction = (arraIdTask) => {
+  const allCheckedFunction = () => {
     setAllChecked(!allChecked);
     if (allChecked) {
-      tasksObj.map((task) => task.isChecked = false);
+      const tasksObjUpdate = tasksObj.map((task) => ({...task, isChecked: false}));
+    setTasksObj(tasksObjUpdate);
     } else {
-      tasksObj.map((task) => task.isChecked = true);
+      //tasksObj.map((task) => task.isChecked = true);
+      const tasksObjUpdate = tasksObj.map((task) => ({...task, isChecked: true}));
+    setTasksObj(tasksObjUpdate);
     }
   };
 
@@ -62,10 +65,8 @@ function App() {
     setNewTask({ taskName: '' });
     setEmptyInputClass('');
     setAllChecked(false);
-      /*const updateTaskObj = [...tasksObj];
-      updateTaskObj[indexTaskToEdit].edit = false;
-      updateTaskObj[indexTaskToEdit].isChecked = false;*/
-      //setTasksObj(updateTaskObj);
+    const tasksObjUpdate = tasksObj.map((task) => ({...task, isChecked: false}));
+    setTasksObj(tasksObjUpdate);
   };
 
   const editTask = (keyName, value) => {
@@ -148,7 +149,6 @@ function App() {
     if (!arrayIdTask) {
       console.log('error: no se encontró la tarea');
     } else {
-      /*El map recoge el 'return task'. En cada iteración de map se comprueba si task está incluida en el arraIdTask y, en caso de estar incluida, se hace un clon de task para actualizar las propiedades isCompleted e isChecked. Por lo que, si task no cumple con la condición (if), esta se retorna sin modificaciones. (Esta función también puede hacerse con un bucle for anidado)*/
       const tasksObjClone = tasksObj.map((task) => {
         if (arrayIdTask.includes(task.idTask)) {
           return {
@@ -203,7 +203,7 @@ function App() {
       <Header logoBlack={logoBlack} resetForm={resetForm} Link={Link} />
       <main>
         <Routes>
-          <Route path="/" element={<Landing Link={Link} logoWhite={logoWhite} />} />
+          <Route path="/" element={<Landing Link={Link} logoWhite={logoBlack} />} />
           <Route
             path="/NewTask"
             element={

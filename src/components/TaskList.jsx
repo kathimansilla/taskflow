@@ -28,8 +28,8 @@ const TaskList = ({
   const [disabledBtn, setDisabledBtn] = useState(true);
   const [disabledEditBtn, setDisabledEditBtn] = useState(true);
 
-console.log(idSelectedTask.length);
-console.log(idSelectedTask);
+  console.log(idSelectedTask.length);
+  console.log(idSelectedTask);
 
   //variables
   const navigate = useNavigate();
@@ -46,9 +46,14 @@ console.log(idSelectedTask);
 
   //functions
   const handleAllChecked = () => {
-    const arrayIdTask = tasksObj.map((task) => task.idTask);
-    setIdSelectedTask(arrayIdTask);
-    allCheckedFunction(arrayIdTask);
+    if (!allChecked) {
+      const arrayIdTask = tasksObj.map((task) => task.idTask);
+      setIdSelectedTask(arrayIdTask);
+      allCheckedFunction();
+    } else {
+      setIdSelectedTask([]);
+      allCheckedFunction();
+    }
   };
 
   const handleSelectedTask = (ev) => {
@@ -56,16 +61,16 @@ console.log(idSelectedTask);
     const idClickedTask = [];
     idClickedTask[0] = parseInt(ev.currentTarget.id);
     const elementClicked = getElementArray(idClickedTask[0]);
-    const indexElementClicked = getIndexElementArray(idClickedTask[0])
+    const indexElementClicked = getIndexElementArray(idClickedTask[0]);
     toggleCheckedTask(idClickedTask);
     const tasksObjClone = [...tasksObj];
-    const idCheckedTasks = tasksObjClone.filter((task) => task.isChecked === true).map((task) => task.idTask);
+    const idCheckedTasks = tasksObjClone
+      .filter((task) => task.isChecked === true)
+      .map((task) => task.idTask);
     setIdSelectedTask(idCheckedTasks);
-    console.log(idCheckedTasks.length);
-    console.log(tasksObj.length);
     if (idCheckedTasks.length !== tasksObj.length) {
       allCheckedBox();
-    };
+    }
   };
 
   /*para que la propiedad checked sea controlable, el input necesita escuchar un evento*/
