@@ -2,7 +2,9 @@
 .footer {
   background-color: #2CC0E0;
   height: 10vh;
-  position: sticky;
+  position: fixed;
+  right: 0;
+  left: 0;
   bottom: 0;
   display: flex;
   gap: 30px;
