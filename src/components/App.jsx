@@ -26,7 +26,7 @@ function App() {
   const [allChecked, setAllChecked] = useState(false);
   const [successMsg, setSuccessMsg] = useState('');
 
-  //generals functions
+  //general functions
   const getElementArray = (taskId) => {
     return tasksObj.find((task) => task.idTask === taskId);
   };
@@ -148,7 +148,7 @@ function App() {
     }
   };
 
-  //con esta función se marca la tarea como completada
+  //This function marks the task as completed
   const toggleCompletedTask = (arrayIdTask) => {
     setAllChecked(false);
     if (!arrayIdTask) {
@@ -168,7 +168,7 @@ function App() {
     }
   };
 
-  //con esta función se modifica la propiedad checked del objeto task
+  //This function modifies the 'checked' property of the 'task' object.
   const toggleCheckedTask = (arrayIdTask) => {
     const checkedTaskIndex = getIndexElementArray(arrayIdTask[0]);
     const taskObjClone = [...tasksObj];
@@ -177,7 +177,7 @@ function App() {
     setTasksObj(taskObjClone);
   };
 
-  //Eliminar tarea
+  //Remove a task
   const deleteTask = (arrayTaskId) => {
     const cleanTaskObj = [...tasksObj];
     const tasksObjUpdate = cleanTaskObj.filter(

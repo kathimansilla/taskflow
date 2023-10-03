@@ -85,7 +85,7 @@ const TaskList = ({
 
   const handleDeleteTask = (ev) => {
     ev.preventDefault();
-    //Busco la tarea a eliminar para pasar su nombre a <Modal />
+    //Find the task to delete to pass its name to <Modal />
     if (idSelectedTask.length === 1) {
       const clickedTask = getElementArray(idSelectedTask[0]);
       setTaskNameToDelete(clickedTask.taskName);
@@ -98,7 +98,6 @@ const TaskList = ({
       setIdSelectedTask([]);
       resetChecked();
     }
-    //quizas no sea necesaria la state var idTaskToDelete
     setIdTaskToDelete(idSelectedTask);
     setIdSelectedTask([]);
     resetChecked();
