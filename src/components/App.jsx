@@ -89,7 +89,6 @@ function App() {
   const getTaskToEdit = (taskId) => {
     const taskToEditLocal = getElementArray(taskId);
     const IndexTaskToEditLocal = getIndexElementArray(taskId);
-    setIndexTaskToEdit(IndexTaskToEditLocal);
     const taskEditTrue = { ...taskToEditLocal, edit: true, isChecked: false };
     setTaskToEdit(taskEditTrue);
     const updateTaskObj = [...tasksObj];
