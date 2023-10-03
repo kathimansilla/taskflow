@@ -18,6 +18,7 @@ const TaskList = ({
   allCheckedFunction,
   resetForm,
   resetChecked,
+  allCheckedBox,
 }) => {
   //state variables
   const [hiddenClass, setHiddenClass] = useState(true);
@@ -60,6 +61,11 @@ console.log(idSelectedTask);
     const tasksObjClone = [...tasksObj];
     const idCheckedTasks = tasksObjClone.filter((task) => task.isChecked === true).map((task) => task.idTask);
     setIdSelectedTask(idCheckedTasks);
+    console.log(idCheckedTasks.length);
+    console.log(tasksObj.length);
+    if (idCheckedTasks.length !== tasksObj.length) {
+      allCheckedBox();
+    };
   };
 
   /*para que la propiedad checked sea controlable, el input necesita escuchar un evento*/

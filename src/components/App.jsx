@@ -45,6 +45,10 @@ function App() {
     }
   };
 
+  const allCheckedBox = () => {
+    setAllChecked(false);
+  };
+
   const resetChecked = () => {
     const tasksObjClone = tasksObj.map((task) => ({...task, isChecked: false}));
     setTasksObj(tasksObjClone);
@@ -224,6 +228,7 @@ function App() {
                 allChecked={allChecked}
                 allCheckedFunction={allCheckedFunction}
                 resetChecked={resetChecked}
+                allCheckedBox={allCheckedBox}
               />
             }
           />
