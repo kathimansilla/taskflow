@@ -41,12 +41,17 @@ function App() {
   const allCheckedFunction = () => {
     setAllChecked(!allChecked);
     if (allChecked) {
-      const tasksObjUpdate = tasksObj.map((task) => ({...task, isChecked: false}));
-    setTasksObj(tasksObjUpdate);
+      const tasksObjUpdate = tasksObj.map((task) => ({
+        ...task,
+        isChecked: false,
+      }));
+      setTasksObj(tasksObjUpdate);
     } else {
-      //tasksObj.map((task) => task.isChecked = true);
-      const tasksObjUpdate = tasksObj.map((task) => ({...task, isChecked: true}));
-    setTasksObj(tasksObjUpdate);
+      const tasksObjUpdate = tasksObj.map((task) => ({
+        ...task,
+        isChecked: true,
+      }));
+      setTasksObj(tasksObjUpdate);
     }
   };
 
@@ -55,7 +60,10 @@ function App() {
   };
 
   const resetChecked = () => {
-    const tasksObjClone = tasksObj.map((task) => ({...task, isChecked: false}));
+    const tasksObjClone = tasksObj.map((task) => ({
+      ...task,
+      isChecked: false,
+    }));
     setTasksObj(tasksObjClone);
     setAllChecked(false);
   };
@@ -65,7 +73,10 @@ function App() {
     setNewTask({ taskName: '' });
     setEmptyInputClass('');
     setAllChecked(false);
-    const tasksObjUpdate = tasksObj.map((task) => ({...task, isChecked: false}));
+    const tasksObjUpdate = tasksObj.map((task) => ({
+      ...task,
+      isChecked: false,
+    }));
     setTasksObj(tasksObjUpdate);
   };
 
@@ -136,9 +147,9 @@ function App() {
       setNewTask({ taskName: '' });
       setTaskToEdit({ taskName: '' });
       setSuccessMsg('¡Guardado con éxito!');
-        setTimeout(() => {
-          setSuccessMsg('');
-        }, 1000);
+      setTimeout(() => {
+        setSuccessMsg('');
+      }, 1000);
       //save in DDBB
     }
   };
@@ -155,8 +166,8 @@ function App() {
             ...task,
             isCompleted: !task.isCompleted,
             isChecked: false,
-          }
-        };
+          };
+        }
         return task;
       });
       setTasksObj(tasksObjClone);
@@ -172,7 +183,15 @@ function App() {
       !taskObjClone[checkedTaskIndex].isChecked;
     setTasksObj(taskObjClone);
   };
-  console.log(tasksObj);
+
+  //Eliminar tarea
+  const deleteTask = (arrayTaskId) => {
+    const cleanTaskObj = [...tasksObj];
+    const tasksObjUpdate = cleanTaskObj.filter(
+      (task) => !arrayTaskId.includes(task.idTask)
+    );
+    setTasksObj(tasksObjUpdate);
+  };
 
   //useEffect
   useEffect(() => {
@@ -191,19 +210,15 @@ function App() {
     }
   }, []);
 
-  //Eliminar tarea
-  const deleteTask = (arrayTaskId) => {
-    const cleanTaskObj = tasksObj.filter((task) => !arrayTaskId.includes(task.idTask));
-    setTasksObj(cleanTaskObj);
-    //ls.remove(taskId);
-  };
-
   return (
     <>
       <Header logoBlack={logoBlack} resetForm={resetForm} Link={Link} />
       <main>
         <Routes>
-          <Route path="/" element={<Landing Link={Link} logoWhite={logoBlack} />} />
+          <Route
+            path="/"
+            element={<Landing Link={Link} logoWhite={logoBlack} />}
+          />
           <Route
             path="/NewTask"
             element={

@@ -1,9 +1,9 @@
 const Modal = ({ hiddenClass, deleteTask, idTaskToDelete, switchHiddenClass, taskNameToDelete, toggleCheckedTask, idSelectedTask, resetForm }) => {
     //functions
     const handleConfirmDelete = () => {
+      console.log(idTaskToDelete);
         deleteTask(idTaskToDelete);
         switchHiddenClass();
-        resetForm();
     };
     const handleCancelDelete = () => {
         switchHiddenClass();
