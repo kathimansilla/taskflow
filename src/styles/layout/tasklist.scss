@@ -56,12 +56,16 @@
         &__check {
           border: none;
           background-color: transparent;
+          cursor: pointer;
         }
         &__name {
           &.completedTask {
             text-decoration: line-through;
           }
         }
+      }
+      &__allcheck {
+        cursor: pointer;
       }
     }
   }

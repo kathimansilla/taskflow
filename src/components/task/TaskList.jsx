@@ -163,6 +163,7 @@ const TaskList = ({
         <li className="item">
           <div>
             <input
+              className='item__allcheck'
               type="checkbox"
               name="checkbox"
               checked={allChecked}
