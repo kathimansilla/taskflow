@@ -5,7 +5,6 @@ import Landing from './Landing';
 import Form from './Form';
 import TaskList from './TaskList';
 import Footer from './Footer';
-import '../styles/App.css';
 import { Route, Routes, Link } from 'react-router-dom';
 import logoBlack from '../assets/images/logo-taskflow.svg';
 import logoWhite from '../assets/images/logo-taskflowWhite.svg';
