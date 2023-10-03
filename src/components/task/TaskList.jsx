@@ -1,4 +1,5 @@
 import Modal from '../common/Modal';
+import TaskItem from './TaskItem';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -113,43 +114,19 @@ const TaskList = ({
     setIdSelectedTask([]);
   };
 
+  //Components: TaskItem + Modal
   const taskList = tasksObj.map((task) => (
     <li
       key={task.idTask}
       className={`item ${task.isCompleted ? 'completedTask' : ''}`}
     >
-      <div
-        className="item__nameTask"
-        onClick={handleSelectedTask}
-        id={task.idTask}
-      >
-        <form>
-          <input
-            type="checkbox"
-            name="checkbox"
-            id={task.idTask}
-            className="item__nameTask__check"
-            checked={task.isChecked}
-            onChange={handleCheckedTask}
-          />
-        </form>
-        <p
-          className={`item__nameTask__name ${
-            task.isCompleted ? 'completedTask' : ''
-          }`}
-        >
-          {task.taskName}
-        </p>
-      </div>
+      <TaskItem task={task} handleSelectedTask={handleSelectedTask} handleCheckedTask={handleCheckedTask} />
       <Modal
         hiddenClass={hiddenClass}
-        taskName={task.taskName}
         deleteTask={deleteTask}
         idTaskToDelete={idTaskToDelete}
-        idSelectedTask={idSelectedTask}
         switchHiddenClass={switchHiddenClass}
         taskNameToDelete={taskNameToDelete}
-        toggleCheckedTask={toggleCheckedTask}
         resetForm={resetForm}
       />
     </li>
