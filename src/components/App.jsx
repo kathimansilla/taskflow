@@ -216,7 +216,7 @@ function App() {
         <Routes>
           <Route
             path="/"
-            element={<Landing Link={Link} logoWhite={logoBlack} />}
+            element={<Landing Link={Link} logoWhite={logoWhite} />}
           />
           <Route
             path="/NewTask"
