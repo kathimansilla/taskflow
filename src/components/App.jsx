@@ -109,7 +109,7 @@ function App() {
     setNewTask(newData);
   };
 
-  /*con esta función se guarda la tarea en el Array de tareas y en localstorage y DDBB y se indica la clase que valida si los inputs están completados o no*/
+  /*This function saves the task in the tasks array, local storage, and the database (not yet), and sets the class that validates whether the inputs are completed or not*/
   const saveTask = () => {
     if (
       (newTask.taskName.trim() === '' || newTask.taskName === undefined) &&
