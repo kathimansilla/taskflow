@@ -48,6 +48,7 @@ function App() {
   const resetChecked = () => {
     const tasksObjClone = tasksObj.map((task) => ({...task, isChecked: false}));
     setTasksObj(tasksObjClone);
+    setAllChecked(false);
   };
 
   const resetForm = () => {
@@ -129,6 +130,7 @@ function App() {
 
   //con esta función se marca la tarea como completada
   const toggleCompletedTask = (arrayIdTask) => {
+    setAllChecked(false);
     if (!arrayIdTask) {
       console.log('error: no se encontró la tarea');
     } else {
