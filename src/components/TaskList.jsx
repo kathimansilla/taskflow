@@ -8,7 +8,6 @@ const TaskList = ({
   toggleCompletedTask,
   getTaskToEdit,
   toggleCheckedTask,
-  getIndexElementArray,
   getElementArray,
   checkIcon,
   trashIcon,
