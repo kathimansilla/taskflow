@@ -111,7 +111,6 @@ console.log(idSelectedTask);
     ev.preventDefault();
     toggleCompletedTask(idSelectedTask);
     setIdSelectedTask([]);
-    resetChecked();
   };
 
   const taskList = tasksObj.map((task) => (

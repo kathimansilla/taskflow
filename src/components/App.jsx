@@ -150,23 +150,11 @@ function App() {
   //con esta función se modifica la propiedad checked del objeto task
   const toggleCheckedTask = (arrayIdTask) => {
     //setAllChecked(false);
-
     const checkedTaskIndex = getIndexElementArray(arrayIdTask[0]);
     const taskObjClone = [...tasksObj];
     taskObjClone[checkedTaskIndex].isChecked =
       !taskObjClone[checkedTaskIndex].isChecked;
     setTasksObj(taskObjClone);
-    /*
-    if (arrayIdTask.length === 1) {
-    const checkedTaskIndex = getIndexElementArray(arrayIdTask[0]);
-    const taskObjClone = [...tasksObj];
-    taskObjClone[checkedTaskIndex].isChecked =
-      !taskObjClone[checkedTaskIndex].isChecked;
-    setTasksObj(taskObjClone);
-  } else {
-    const taskObjClone = tasksObj.map((task) => ({...task, isChecked: !task.isChecked}));
-    setTasksObj(taskObjClone);
-  }*/
   };
   console.log(tasksObj);
 
@@ -189,7 +177,6 @@ function App() {
 
   //Eliminar tarea
   const deleteTask = (arrayTaskId) => {
-    /*includes será false si task.idTask está en arrayTaskId, por lo que esos elementos se eliminarán ya que la función filter devuelve un nuevo array con los elementos que dan como resultado true a la condición dada*/
     const cleanTaskObj = tasksObj.filter((task) => !arrayTaskId.includes(task.idTask));
     setTasksObj(cleanTaskObj);
     //ls.remove(taskId);
