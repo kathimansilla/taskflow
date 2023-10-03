@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
 import '../styles/App.scss';
-import Header from './Header';
-import Landing from './Landing';
-import Form from './Form';
-import TaskList from './TaskList';
-import Footer from './Footer';
+import Header from './layout/Header';
+import Landing from './layout/Landing';
+import Form from './layout/Form';
+import TaskList from './task/TaskList';
+import Footer from './layout/Footer';
 import { Route, Routes, Link } from 'react-router-dom';
 import logoBlack from '../assets/images/logo-taskflow.svg';
 import logoWhite from '../assets/images/logo-taskflowWhite.svg';

@@ -1,4 +1,4 @@
-import Modal from './Modal';
+import Modal from '../common/Modal';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
