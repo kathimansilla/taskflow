@@ -26,9 +26,6 @@ function App() {
   const [indexTaskToEdit, setIndexTaskToEdit] = useState();
   const [allChecked, setAllChecked] = useState(false);
 
-  console.log(allChecked);
-  console.log(tasksObj);
-
   //generals functions
   const getElementArray = (taskId) => {
     return tasksObj.find((task) => task.idTask === taskId);
@@ -48,15 +45,20 @@ function App() {
     }
   };
 
+  const resetChecked = () => {
+    const tasksObjClone = tasksObj.map((task) => ({...task, isChecked: false}));
+    setTasksObj(tasksObjClone);
+  };
+
   const resetForm = () => {
     setTaskToEdit({ taskName: '', edit: false });
     setNewTask({ taskName: '' });
     setEmptyInputClass('');
     setAllChecked(false);
-      const updateTaskObj = [...tasksObj];
+      /*const updateTaskObj = [...tasksObj];
       updateTaskObj[indexTaskToEdit].edit = false;
-      updateTaskObj[indexTaskToEdit].isChecked = false;
-      setTasksObj(updateTaskObj);
+      updateTaskObj[indexTaskToEdit].isChecked = false;*/
+      //setTasksObj(updateTaskObj);
   };
 
   const editTask = (keyName, value) => {
@@ -127,7 +129,6 @@ function App() {
 
   //con esta función se marca la tarea como completada
   const toggleCompletedTask = (arrayIdTask) => {
-    console.log(arrayIdTask);
     if (!arrayIdTask) {
       console.log('error: no se encontró la tarea');
     } else {
@@ -147,14 +148,27 @@ function App() {
   };
 
   //con esta función se modifica la propiedad checked del objeto task
-  const toggleCheckedTask = (idTask) => {
-    setAllChecked(false);
-    const checkedTaskIndex = getIndexElementArray(idTask);
+  const toggleCheckedTask = (arrayIdTask) => {
+    //setAllChecked(false);
+
+    const checkedTaskIndex = getIndexElementArray(arrayIdTask[0]);
     const taskObjClone = [...tasksObj];
     taskObjClone[checkedTaskIndex].isChecked =
       !taskObjClone[checkedTaskIndex].isChecked;
     setTasksObj(taskObjClone);
+    /*
+    if (arrayIdTask.length === 1) {
+    const checkedTaskIndex = getIndexElementArray(arrayIdTask[0]);
+    const taskObjClone = [...tasksObj];
+    taskObjClone[checkedTaskIndex].isChecked =
+      !taskObjClone[checkedTaskIndex].isChecked;
+    setTasksObj(taskObjClone);
+  } else {
+    const taskObjClone = tasksObj.map((task) => ({...task, isChecked: !task.isChecked}));
+    setTasksObj(taskObjClone);
+  }*/
   };
+  console.log(tasksObj);
 
   //useEffect
   useEffect(() => {
@@ -177,7 +191,6 @@ function App() {
   const deleteTask = (arrayTaskId) => {
     /*includes será false si task.idTask está en arrayTaskId, por lo que esos elementos se eliminarán ya que la función filter devuelve un nuevo array con los elementos que dan como resultado true a la condición dada*/
     const cleanTaskObj = tasksObj.filter((task) => !arrayTaskId.includes(task.idTask));
-    console.log(cleanTaskObj);  
     setTasksObj(cleanTaskObj);
     //ls.remove(taskId);
   };
@@ -221,6 +234,7 @@ function App() {
                 resetForm={resetForm}
                 allChecked={allChecked}
                 allCheckedFunction={allCheckedFunction}
+                resetChecked={resetChecked}
               />
             }
           />

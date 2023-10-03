@@ -16,6 +16,8 @@ const TaskList = ({
   noTask,
   allChecked,
   allCheckedFunction,
+  resetForm,
+  resetChecked,
 }) => {
   //state variables
   const [hiddenClass, setHiddenClass] = useState(true);
@@ -24,6 +26,9 @@ const TaskList = ({
   const [idSelectedTask, setIdSelectedTask] = useState([]);
   const [disabledBtn, setDisabledBtn] = useState(true);
   const [disabledEditBtn, setDisabledEditBtn] = useState(true);
+
+console.log(idSelectedTask.length);
+console.log(idSelectedTask);
 
   //variables
   const navigate = useNavigate();
@@ -46,17 +51,15 @@ const TaskList = ({
   };
 
   const handleSelectedTask = (ev) => {
-    const idClickedTask = parseInt(ev.currentTarget.id);
+    const idClickedTaskNoArray = parseInt(ev.currentTarget.id);
+    const idClickedTask = [];
+    idClickedTask[0] = parseInt(ev.currentTarget.id);
+    const elementClicked = getElementArray(idClickedTask[0]);
+    const indexElementClicked = getIndexElementArray(idClickedTask[0])
     toggleCheckedTask(idClickedTask);
-    const elementClicked = getElementArray(idClickedTask);
-
-    if (elementClicked.isChecked) {
-      const idSelectedTaskClone = [...idSelectedTask];
-      idSelectedTaskClone.push(idClickedTask);
-      setIdSelectedTask(idSelectedTaskClone);
-    } else {
-      setIdSelectedTask([]);
-    }
+    const tasksObjClone = [...tasksObj];
+    const idCheckedTasks = tasksObjClone.filter((task) => task.isChecked === true).map((task) => task.idTask);
+    setIdSelectedTask(idCheckedTasks);
   };
 
   /*para que la propiedad checked sea controlable, el input necesita escuchar un evento*/
@@ -71,8 +74,12 @@ const TaskList = ({
   };
 
   const handleEditTask = () => {
-    getTaskToEdit(idSelectedTask[0]);
-    navigate('/NewTask');
+    if (idSelectedTask.length === 1) {
+      getTaskToEdit(idSelectedTask[0]);
+      navigate('/NewTask');
+      setIdSelectedTask([]);
+      resetChecked();
+    }
   };
 
   const handleDeleteTask = (ev) => {
@@ -82,13 +89,18 @@ const TaskList = ({
       const clickedTask = getElementArray(idSelectedTask[0]);
       setTaskNameToDelete(clickedTask.taskName);
       switchHiddenClass();
+      setIdSelectedTask([]);
+      resetChecked();
     } else {
       setTaskNameToDelete('las tareas seleccionadas');
       switchHiddenClass();
+      setIdSelectedTask([]);
+      resetChecked();
     }
     //quizas no sea necesaria la state var idTaskToDelete
     setIdTaskToDelete(idSelectedTask);
     setIdSelectedTask([]);
+    resetChecked();
   };
 
   const switchHiddenClass = () => {
@@ -99,6 +111,7 @@ const TaskList = ({
     ev.preventDefault();
     toggleCompletedTask(idSelectedTask);
     setIdSelectedTask([]);
+    resetChecked();
   };
 
   const taskList = tasksObj.map((task) => (
@@ -138,6 +151,7 @@ const TaskList = ({
         switchHiddenClass={switchHiddenClass}
         taskNameToDelete={taskNameToDelete}
         toggleCheckedTask={toggleCheckedTask}
+        resetForm={resetForm}
       />
     </li>
   ));
@@ -149,9 +163,12 @@ const TaskList = ({
         {taskList}
         <li className="item">
           <div>
-            <input type="checkbox" name="checkbox"
-            checked={allChecked}
-            onClick={handleAllChecked}/>
+            <input
+              type="checkbox"
+              name="checkbox"
+              checked={allChecked}
+              onChange={handleAllChecked}
+            />
           </div>
         </li>
       </ul>
