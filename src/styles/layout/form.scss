@@ -1,7 +1,7 @@
 @import '../core/variables.scss';
 
 .formSection {
-  background-color: #FAF6FB;
+  background-color: #03647a;
   height: 80vh;
   display: flex;
   flex-direction: column;
@@ -15,12 +15,12 @@
     align-items: center;
     gap: 20px;
     &__SuccessMsg {
-      color: #1c4150;
+      color: rgb(222, 222, 222);
     }
     &__title {
       text-align: center;
       font-family: $fontGeneral;
-      color: #042B3A;
+      color: white;
     }
     &__input {
       width: 130%;
@@ -42,7 +42,7 @@
       &__button {
         border-radius: 20%;
         background-color: transparent;
-        font-size: 0.8rem;
+        font-size: .9rem;
         font-family: $fontGeneral;
         &:hover {
           background-color: white;
