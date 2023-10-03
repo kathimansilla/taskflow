@@ -1,7 +1,7 @@
 // eslint-disable-next-line react/prop-types
 const Footer = ({ logoBlack, Link, resetForm, plusIcon, listIcon }) => {
 
-    const handleLink = (ev) => {
+    const handleLink = () => {
         resetForm();
       };
   

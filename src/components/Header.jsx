@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 
 const Header = ({ logoBlack, Link, resetForm }) => {
-  const handleLink = (ev) => {
+  const handleLink = () => {
     resetForm();
   };
 

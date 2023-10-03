@@ -28,9 +28,6 @@ const TaskList = ({
   const [disabledBtn, setDisabledBtn] = useState(true);
   const [disabledEditBtn, setDisabledEditBtn] = useState(true);
 
-  console.log(idSelectedTask.length);
-  console.log(idSelectedTask);
-
   //variables
   const navigate = useNavigate();
   let emptyMsgClass =
@@ -57,11 +54,8 @@ const TaskList = ({
   };
 
   const handleSelectedTask = (ev) => {
-    const idClickedTaskNoArray = parseInt(ev.currentTarget.id);
     const idClickedTask = [];
     idClickedTask[0] = parseInt(ev.currentTarget.id);
-    const elementClicked = getElementArray(idClickedTask[0]);
-    const indexElementClicked = getIndexElementArray(idClickedTask[0]);
     toggleCheckedTask(idClickedTask);
     const tasksObjClone = [...tasksObj];
     const idCheckedTasks = tasksObjClone
@@ -78,9 +72,6 @@ const TaskList = ({
     const idClickedTask = parseInt(ev.target.id);
     if (idSelectedTask.length === 0) {
       setIdSelectedTask([idClickedTask]);
-    } else {
-      //setDisabledEditBtn(true);
-      //setIdSelectedTask([...idSelectedTask, idClickedTask]);
     }
   };
 

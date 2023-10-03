@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import '../styles/App.css';
+import '../styles/App.scss';
 import Header from './Header';
 import Landing from './Landing';
 import Form from './Form';
@@ -24,7 +24,6 @@ function App() {
   const [emptyInputClass, setEmptyInputClass] = useState('');
   const [taskToEdit, setTaskToEdit] = useState({ taskName: '', edit: false });
   const [noTask, setNoTask] = useState(true);
-  const [indexTaskToEdit, setIndexTaskToEdit] = useState();
   const [allChecked, setAllChecked] = useState(false);
   const [successMsg, setSuccessMsg] = useState('');
 
@@ -94,7 +93,6 @@ function App() {
     setIndexTaskToEdit(IndexTaskToEditLocal);
     const taskEditTrue = { ...taskToEditLocal, edit: true, isChecked: false };
     setTaskToEdit(taskEditTrue);
-
     const updateTaskObj = [...tasksObj];
     updateTaskObj[IndexTaskToEditLocal].edit = false;
     updateTaskObj[IndexTaskToEditLocal].isChecked = false;
@@ -136,7 +134,6 @@ function App() {
         setTimeout(() => {
           setSuccessMsg('');
         }, 1000);
-        //save in DDBB
       }
     } else {
       setIdTask(idTask + 1);
@@ -150,7 +147,6 @@ function App() {
       setTimeout(() => {
         setSuccessMsg('');
       }, 1000);
-      //save in DDBB
     }
   };
 
@@ -176,7 +172,6 @@ function App() {
 
   //con esta función se modifica la propiedad checked del objeto task
   const toggleCheckedTask = (arrayIdTask) => {
-    //setAllChecked(false);
     const checkedTaskIndex = getIndexElementArray(arrayIdTask[0]);
     const taskObjClone = [...tasksObj];
     taskObjClone[checkedTaskIndex].isChecked =
@@ -217,7 +212,7 @@ function App() {
         <Routes>
           <Route
             path="/"
-            element={<Landing Link={Link} logoWhite={logoBlack} />}
+            element={<Landing Link={Link} logoWhite={logoWhite} />}
           />
           <Route
             path="/NewTask"

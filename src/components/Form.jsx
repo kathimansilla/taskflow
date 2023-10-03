@@ -1,4 +1,5 @@
 const Form = ({ newTaskObj, newTask, saveTask, emptyInputClass, taskToEdit, editTask, resetForm, getIndexElementArray, successMsg }) => {
+  
   //functions
   const handleCancel = (ev) => {
     ev.preventDefault();
