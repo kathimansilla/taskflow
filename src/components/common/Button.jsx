@@ -1,15 +1,15 @@
-const Button = ({ onClick, disabled, src, alt }) => {
+const Button = ({ onClick, disabled, src, alt, classBtn, classImg }) => {
 
     return (
         <button
-          className="taskListSection__buttons__button"
+          className={classBtn}
           onClick={onClick}
           disabled={disabled}
         >
           <img
             src={src}
             alt={alt}
-            className="taskListSection__buttons__button__icon"
+            className={classImg}
           />
         </button>
     );

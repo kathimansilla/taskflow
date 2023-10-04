@@ -1,4 +1,6 @@
-const TaskItem = ({ task, handleSelectedTask, handleCheckedTask }) => {
+import Button from '../common/Button';
+
+const TaskItem = ({ task, handleSelectedTask, handleCheckedTask, menuDotsVertical }) => {
 
     return (
         <div
@@ -23,6 +25,7 @@ const TaskItem = ({ task, handleSelectedTask, handleCheckedTask }) => {
         >
           {task.taskName}
         </p>
+        <Button src={menuDotsVertical} alt="Menu dots vertical icon" disabled='false' onClick='' classBtn='item__nameTask__menu' classImg='' />
       </div>
     );
 };

@@ -16,6 +16,7 @@ import listIcon from '../assets/images/list-solid.svg';
 import checkIcon from '../assets/images/square-check-regular.svg';
 import trashIcon from '../assets/images/trash-solid.svg';
 import editIcon from '../assets/images/edit-square-solid.svg';
+import menuDotsVertical from '../assets/images/ellipsis-vertical-solid.svg';
 
 function App() {
   // state variables
@@ -250,6 +251,7 @@ function App() {
                 allCheckedFunction={allCheckedFunction}
                 resetChecked={resetChecked}
                 allCheckedBox={allCheckedBox}
+                menuDotsVertical={menuDotsVertical}
               />
             }
           />

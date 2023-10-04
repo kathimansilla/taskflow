@@ -63,6 +63,16 @@
             text-decoration: line-through;
           }
         }
+        &__menu {
+          border: none;
+          background-color: transparent;
+          width: 17px;
+          opacity: .3;
+          cursor: pointer;
+          &:hover {
+            opacity: 1;
+          }
+        }
       }
       &__allcheck {
         cursor: pointer;
@@ -84,7 +94,6 @@
       background-color: transparent;
       border: none;
       margin: 5px 0;
-      font-size: 0.7rem;
       &__icon {
         width: 20px;
       }

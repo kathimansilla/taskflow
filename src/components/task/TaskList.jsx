@@ -20,6 +20,7 @@ const TaskList = ({
   resetForm,
   resetChecked,
   allCheckedBox,
+  menuDotsVertical,
 }) => {
   //state variables
   const [hiddenClass, setHiddenClass] = useState(true);
@@ -30,6 +31,8 @@ const TaskList = ({
   const [disabledEditBtn, setDisabledEditBtn] = useState(true);
 
   //variables
+  const classImg = "taskListSection__buttons__button__icon";
+  const classBtn = "taskListSection__buttons__button"
   const navigate = useNavigate();
   let emptyMsgClass =
     tasksObj.length === 0
@@ -121,7 +124,7 @@ const TaskList = ({
       key={task.idTask}
       className={`item ${task.isCompleted ? 'completedTask' : ''}`}
     >
-      <TaskItem task={task} handleSelectedTask={handleSelectedTask} handleCheckedTask={handleCheckedTask} />
+      <TaskItem task={task} handleSelectedTask={handleSelectedTask} handleCheckedTask={handleCheckedTask} menuDotsVertical={menuDotsVertical} />
       <Modal
         hiddenClass={hiddenClass}
         deleteTask={deleteTask}
@@ -151,9 +154,9 @@ const TaskList = ({
         </li>
       </ul>
       <div className={`taskListSection__buttons ${noTask ? 'hidden' : ''}`}>
-        <Button onClick={handleCompleteTask} disabled={disabledBtn} src={checkIcon} alt="Check icon" />
-        <Button onClick={handleDeleteTask} disabled={disabledBtn} src={trashIcon} alt="Trash icon" />
-        <Button onClick={handleEditTask} disabled={disabledEditBtn ? false : true} src={editIcon} alt="Edit icon" />
+        <Button classImg={classImg} classBtn={classBtn} onClick={handleCompleteTask} disabled={disabledBtn} src={checkIcon} alt="Check icon" />
+        <Button classImg={classImg} classBtn={classBtn} onClick={handleDeleteTask} disabled={disabledBtn} src={trashIcon} alt="Trash icon" />
+        <Button classImg={classImg} classBtn={classBtn} onClick={handleEditTask} disabled={disabledEditBtn ? false : true} src={editIcon} alt="Edit icon" />
       </div>
     </section>
   );
