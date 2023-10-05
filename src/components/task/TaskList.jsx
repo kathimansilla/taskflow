@@ -108,6 +108,15 @@ const TaskList = ({
     resetChecked();
   };
 
+  const handleConfirmDelete = () => {
+    deleteTask(idTaskToDelete);
+    switchHiddenClass();
+};
+const handleCancelDelete = () => {
+    switchHiddenClass();
+    resetForm();
+};
+
   const switchHiddenClass = () => {
     setHiddenClass(!hiddenClass);
   };
@@ -119,6 +128,15 @@ const TaskList = ({
   };
 
   //Components: TaskItem + Modal
+  const phrasesObj = [
+    {phrase: 'Eliminar',
+    event: handleConfirmDelete,
+    classModifier: 'modal__container__buttons__btn--1'},
+    {phrase: 'Cancelar',
+    event: handleCancelDelete,
+    classModifier: ''}
+  ];
+
   const taskList = tasksObj.map((task) => (
     <li
       key={task.idTask}
@@ -132,6 +150,8 @@ const TaskList = ({
         switchHiddenClass={switchHiddenClass}
         taskNameToDelete={taskNameToDelete}
         resetForm={resetForm}
+        hiddenTag={0}
+        phrasesObj={phrasesObj}
       />
     </li>
   ));

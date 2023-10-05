@@ -1,4 +1,5 @@
 import Button from '../common/Button';
+import Modal from '../common/Modal';
 
 const TaskItem = ({ task, handleSelectedTask, handleCheckedTask, menuDotsVertical }) => {
 
