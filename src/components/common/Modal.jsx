@@ -3,6 +3,7 @@ const Modal = ({
   taskNameToDelete,
   hiddenTag,
   phrasesObj,
+  classMenuTask
 }) => {
   //hiddenTag: if this is True, <p> is hidden, and if it's false, <button> is hidden
 
@@ -30,7 +31,7 @@ const Modal = ({
         >
           ¿Quiere eliminar {taskNameToDelete}?
         </p>
-        <ul className="modal__container__buttons">{buttons}</ul>
+        <ul className={`modal__container__buttons ${classMenuTask}`}>{buttons}</ul>
       </div>
     </div>
   );
